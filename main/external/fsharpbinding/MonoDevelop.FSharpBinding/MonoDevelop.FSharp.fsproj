@@ -166,7 +166,7 @@
       <HintPath>..\..\..\build\bin\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Xamarin.Mac">
+    <Reference Include="Xamarin.Mac" Condition="$([MSBuild]::IsOSPlatform('OSX'))">
       <HintPath>..\..\..\build\bin\Xamarin.Mac.dll</HintPath>
       <Private>False</Private>
     </Reference>

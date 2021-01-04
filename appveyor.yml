@@ -1,4 +1,4 @@
-version: 7.6.9.{build}
+version: 7.6.9.22-{build}
 branches:
   only:
   - monodevelopwin-7.6.9.22

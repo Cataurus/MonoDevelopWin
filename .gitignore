@@ -278,3 +278,6 @@ main/po/StripMnemonics.pdb
 main/po/StripMnemonics.exe
 *.binlog
 *.ProjectImports.zip
+/main/MonoDevelopBuild.JustErrors.log
+/main/MonoDevelopBuild.JustWarnings.log
+/main/MonoDevelopBuild.Summary.log

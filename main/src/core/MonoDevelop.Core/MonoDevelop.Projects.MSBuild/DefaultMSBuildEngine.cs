@@ -1,4 +1,4 @@
-﻿//
+//
 // DefaultMSBuildEngine.cs
 //
 // Author:
@@ -78,7 +78,7 @@ namespace MonoDevelop.Projects.MSBuild
 					return Parent.GetRootMSBuildProject ();
 				return Project;
 			}
-        }
+		}
 
 		class PropertyInfo
 		{
@@ -252,8 +252,8 @@ namespace MonoDevelop.Projects.MSBuild
 				var rootProject = pi.GetRootMSBuildProject ();
 
 				objects = implicitSdks.Select (sdkPath => new MSBuildImport { Sdk = sdkPath, Project = "Sdk.props" })
-				                      .Concat (objects)
-				                      .Concat (implicitSdks.Select (sdkPath => new MSBuildImport { Sdk = sdkPath, Project = "Sdk.targets" }));
+									  .Concat (objects)
+									  .Concat (implicitSdks.Select (sdkPath => new MSBuildImport { Sdk = sdkPath, Project = "Sdk.targets" }));
 			}
 
 			// If there is a .user project file load it using a fake import item added at the end of the objects list
@@ -955,10 +955,10 @@ namespace MonoDevelop.Projects.MSBuild
 					else
 						continue;
 				}
-                if (sb.Length > 0)
+				if (sb.Length > 0)
 					sb.Append ('|');
 				sb.Append ('^');
-                for (int n = 0; n < ex.Length; n++) {
+				for (int n = 0; n < ex.Length; n++) {
 					var c = ex [n];
 					if (c == '*') {
 						if (n < ex.Length - 1 && ex [n + 1] == '*') {
@@ -981,7 +981,7 @@ namespace MonoDevelop.Projects.MSBuild
 				sb.Append ('$');
 			}
 			return Core.StringBuilderCache.ReturnAndFree (sb);
-        }
+		}
 
 		static char [] regexEscapeChars = { '\\', '^', '$', '{', '}', '[', ']', '(', ')', '.', '*', '+', '?', '|', '<', '>', '-', '&' };
 
@@ -1047,7 +1047,7 @@ namespace MonoDevelop.Projects.MSBuild
 			if (!project.ImportedProjects.TryGetValue (import, out prefProjects))
 				project.ImportedProjects [import] = prefProjects = new List<ProjectInfo> ();
 			prefProjects.Add (imported);
-        }
+		}
 
 		void DisposeImportedProjects (ProjectInfo pi)
 		{
@@ -1088,7 +1088,7 @@ namespace MonoDevelop.Projects.MSBuild
 					project.GlobIncludes.AddRange (p.GlobIncludes);
 				}
 				return;
-            }
+			}
 
 
 			// Try importing the files using the import as is

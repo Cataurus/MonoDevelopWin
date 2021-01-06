@@ -61,7 +61,7 @@ namespace MonoDevelop.Ide.WelcomePage
 				new WelcomePageRecentProjectsList (GettextCatalog.GetString ("Solutions"))
 				),
 				new WelcomePageColumn (
-					new WelcomePageNewsFeed (GettextCatalog.GetString ("Xamarin News"), "http://software.xamarin.com/Service/News", "NewsLinks")
+					new WelcomePageNewsFeed (GettextCatalog.GetString ("Visual Studio News"), "https://vsstartpage.blob.core.windows.net/news/vs", "NewsLinks")
 				),
 				new WelcomePageColumn (
 					new WelcomePageTipOfTheDaySection ()

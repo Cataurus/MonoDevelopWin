@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="..\..\..\MonoDevelop.props" />
   <Import Project="$(ReferencesGtk)" />
   <PropertyGroup>
@@ -13,17 +13,17 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup Condition=" '$(Configuration)' == 'ReleaseMac' OR '$(Configuration)' == 'DebugMac' ">
-      <Reference Include="Xamarin.Mac">
-        <HintPath>..\..\..\external\Xamarin.Mac.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
-      <ProjectReference Include="..\..\..\external\xwt\Xwt.XamMac\Xwt.XamMac.csproj">
+    <Reference Include="Xamarin.Mac">
+      <HintPath>..\..\..\external\Xamarin.Mac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <ProjectReference Include="..\..\..\external\xwt\Xwt.XamMac\Xwt.XamMac.csproj">
       <Project>{B7C1673E-5124-4BE5-8D21-EC8B12F85B6B}</Project>
-        <Name>Xwt.XamMac</Name>
-        <Private>False</Private>
+      <Name>Xwt.XamMac</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-   <ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Design" />
@@ -184,11 +184,9 @@
     <EmbeddedResource Include="icons\pad-document-outline-16~dark~sel%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MonoDevelop.DesignerSupport.Toolbox\Helpers\" />
-    <Folder Include="MonoDevelop.DesignerSupport.Toolbox\NativeViews\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

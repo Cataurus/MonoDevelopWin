@@ -60,13 +60,16 @@
       <Name>Mono.Debugging.Soft</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <PropertyGroup>
       <UnitTestsDir>..\..\..\..\external\debugger-libs\UnitTests</UnitTestsDir>
     </PropertyGroup>
     <ItemGroup>
-        <TestProjectFiles Include="$(UnitTestsDir)\**" Exclude="$(UnitTestsDir)\Mono.Debugging.Tests\**;$(UnitTestsDir)\**\.DS_Store" />
+      <TestProjectFiles Include="$(UnitTestsDir)\**" Exclude="$(UnitTestsDir)\Mono.Debugging.Tests\**;$(UnitTestsDir)\**\.DS_Store" />
     </ItemGroup>
     <Copy SourceFiles="@(TestProjectFiles)" DestinationFolder="$(OutputPath)\DebuggerTestProjects\%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>

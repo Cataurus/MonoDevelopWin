@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="..\..\..\MonoDevelop.props" />
   <Import Project="$(ReferencesVSEditor)" />
   <Import Project="$(ReferencesGtk)" />
@@ -75,7 +75,9 @@
     <Compile Include="Gui\ImportsOptionsPanel.cs" />
     <Compile Include="AddinInfo.cs" />
     <Compile Include="Project\VBProjectExtension.cs" />
-    <Compile Include="Project\ImprovedCodeDomProvider.cs" />
+    <Compile Include="Project\ImprovedCodeDomProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MonoDevelop.VBNet\VBNetTextEditorExtension.cs" />
     <Compile Include="Gui\MonoDevelop.VBNetBinding.ConfigurationOptionsPanelWidget.cs" />
     <Compile Include="Gui\MonoDevelop.VBNetBinding.ImportsOptionsPanelWidget.cs" />
@@ -88,6 +90,9 @@
     <EmbeddedResource Include="templates\VBGtkSharp2Project.xpt.xml" />
     <EmbeddedResource Include="VBNetBinding.addin.xml" />
     <EmbeddedResource Include="templates\AssemblyInfo.xft.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

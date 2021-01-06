@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="..\..\..\MonoDevelop.props" />
   <Import Project="$(ReferencesGtk)" />
   <Import Project="$(ReferencesRoslyn)" />
@@ -220,6 +220,7 @@
     <InternalsVisibleTo Include="MonoDevelop.Refactoring.Tests" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="MonoDevelop.Refactoring\QuickFixHandler.cs" />
     <None Include="MonoDevelop.CodeIssues\Pad\Runner\AnalysisJobQueue.cs" />
     <None Include="MonoDevelop.CodeIssues\Pad\Runner\CodeIssueEventArgs.cs" />

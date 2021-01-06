@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\MonoDevelop.props" />
   <Import Project="$(ReferencesGtk)" />
   <PropertyGroup>
@@ -45,6 +45,7 @@
     <EmbeddedResource Include="Properties\MonoDevelop.AspNetCore.addin.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Templates\MiddlewareClass.xft.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -153,20 +154,17 @@
     <InternalsVisibleTo Include="DotNetCore.Debugger" />
     <InternalsVisibleTo Include="MonoDevelop.AspNetCore.Tests" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MonoDevelop.AspNetCore.Commands\" />
-    <Folder Include="MonoDevelop.AspNetCore.Dialogs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
-     <ItemGroup>
-       <NuGetPackage Include="Microsoft.DotNet.Web.ProjectTemplates.1.x">
-         <Version>$(TemplatesVersion1x)</Version>
-       </NuGetPackage>
-       <NuGetPackage Include="Microsoft.DotNet.Web.ProjectTemplates.2.0">
-         <Version>$(TemplatesVersion20)</Version>
-       </NuGetPackage>
-     </ItemGroup>
-     <Copy SourceFiles="..\..\..\packages\%(NuGetPackage.Identity).%(NuGetPackage.Version)\%(NuGetPackage.Identity).%(NuGetPackage.Version).nupkg" DestinationFolder="$(OutputPath)\Templates" SkipUnchangedFiles="true" />
-   </Target>
+    <ItemGroup>
+      <NuGetPackage Include="Microsoft.DotNet.Web.ProjectTemplates.1.x">
+        <Version>$(TemplatesVersion1x)</Version>
+      </NuGetPackage>
+      <NuGetPackage Include="Microsoft.DotNet.Web.ProjectTemplates.2.0">
+        <Version>$(TemplatesVersion20)</Version>
+      </NuGetPackage>
+    </ItemGroup>
+    <Copy SourceFiles="..\..\..\packages\%(NuGetPackage.Identity).%(NuGetPackage.Version)\%(NuGetPackage.Identity).%(NuGetPackage.Version).nupkg" DestinationFolder="$(OutputPath)\Templates" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

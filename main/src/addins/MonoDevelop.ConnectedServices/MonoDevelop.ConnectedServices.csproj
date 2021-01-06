@@ -140,6 +140,7 @@
     <EmbeddedResource Include="Properties\MonoDevelop.ConnectedServices.addin.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ReadMe.md" />
     <None Include="packages.config" />
   </ItemGroup>

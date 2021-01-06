@@ -1,4 +1,4 @@
-﻿// MSBuildProjectService.cs
+// MSBuildProjectService.cs
 //
 // Author:
 //   Lluis Sanchez Gual <lluis@novell.com>
@@ -1230,7 +1230,7 @@ namespace MonoDevelop.Projects.MSBuild
 			if (!builders.TryGetValue (key, out list))
 				builders [key] = list = new List<RemoteBuildEngine> ();
 			list.Add (builder);
-        }
+		}
 
 		public IEnumerable<RemoteBuildEngine> GetBuilders (string key)
 		{
@@ -1253,8 +1253,8 @@ namespace MonoDevelop.Projects.MSBuild
 					if (p.Value.Count == 0)
 						builders.Remove (p.Key);
 					return;
-                }
-            }
-        }
+				}
+			}
+		}
 	}
 }

@@ -97,9 +97,7 @@
     <Compile Include="WindowsPlatform.cs" />
     <Compile Include="RecentFiles.cs" />
     <Compile Include="JumpList.cs" />
-    <Compile Include="WindowsProxyCredentialProvider.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="WindowsProxyCredentialProvider.cs" />
     <Compile Include="WindowsSecureStoragePasswordProvider.cs" />
     <Compile Include="AddinInfo.cs" />
     <Compile Include="CustomDialogs\CustomCommonOpenFileDialog.cs" />
@@ -196,6 +194,9 @@
     <Page Include="Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

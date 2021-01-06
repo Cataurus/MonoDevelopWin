@@ -1,4 +1,4 @@
-﻿// 
+// 
 // MsNetTargetRuntime.cs
 //  
 // Author:
@@ -172,10 +172,19 @@ namespace MonoDevelop.Core.Assemblies
 		
 		public override string GetMSBuildBinPath (string toolsVersion)
 		{
-			var instances = MSBuildLocator.QueryVisualStudioInstances (new VisualStudioInstanceQueryOptions ())
+			Version version = new Version (toolsVersion);
+
+			var instancesEnum = MSBuildLocator.QueryVisualStudioInstances (new VisualStudioInstanceQueryOptions ());
+
+			VisualStudioInstance[] instances = instancesEnum
 				.Where (vs => vs.DiscoveryType == DiscoveryType.VisualStudioSetup)
+				// um auszuschließen das Version > toolsVersion
+				.Where (vs => vs.Version.Major == version.Major)
 				.ToArray ();
+						
+
 			var instance = instances.MaxValueOrDefault (vs => vs.Version);
+
 			if (instance != null)
 				return instance.MSBuildPath;
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // MSBuildEvaluationContext.cs
 //
 // Author:

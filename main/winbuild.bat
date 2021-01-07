@@ -41,11 +41,11 @@ set "PLATFORM=Any CPU"
 "%MSBUILD_EXE%" -fl1 -fl2 -fl3 -flp1:Summary;Encoding=UTF-8;logfile=MonoDevelopBuild.Summary.log -flp2:errorsonly;logfile=MonoDevelopBuild.JustErrors.log;verbosity=detailed;Encoding=UTF-8 -flp3:warningsonly;verbosity=detailed;Encoding=UTF-8;logfile=MonoDevelopBuild.JustWarnings.log /r /m "/p:Configuration=%CONFIG%" "/p:Platform=%PLATFORM%" %* || goto :error
 
 REM Build Installer
-"%MSBUILD_EXE%" ../setup/setup.sln -fl1 -flp1:MonoDevelopSetup.log "/p:Configuration=Debug" "/p:Platform=x86" %* || goto :error
+"%MSBUILD_EXE%" ../setup/setup.sln -fl1 -flp1:logfile=MonoDevelopSetup.log "/p:Configuration=Debug" "/p:Platform=x86" %* || goto :error
 
 goto :eof
 
 :error
 
-for %%x in (%CMDCMDLINE%) do if /i "%%~x" == "/c" pause
+REM for %%x in (%CMDCMDLINE%) do if /i "%%~x" == "/c" pause
 exit /b %ERRORLEVEL%

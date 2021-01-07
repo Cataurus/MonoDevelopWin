@@ -1,0 +1,48 @@
+﻿<Project>
+  <Target Name="BeforeBuild">
+    <Exec Command="del bin\$(Configuration)\*.msi" />
+    <!--  Get Version-->
+    <GetAssemblyIdentity AssemblyFiles="..\..\main\build\bin\monodevelop.exe">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <!-- Define some variables we need -->
+    <PropertyGroup>
+      <DefineConstants>BuildVersion=%(AssemblyVersion.Version);BasePath=..\..\main\build;BasePathBin=..\..\main\build\bin;BasePathAddIns=..\..\main\build\AddIns;BasePathData=..\..\main\build\data</DefineConstants>
+    </PropertyGroup>
+    <HeatDirectory 
+      OutputFile="BinComponentsGenerated.wxs" 
+      DirectoryRefId="INSTALLFOLDERBIN" 
+      ComponentGroupName="PublishedComponentsBin" 
+      SuppressCom="true" Directory="..\..\main\build\bin\" 
+      SuppressFragments="true" SuppressRegistry="true" 
+      SuppressRootDirectory="true" AutoGenerateGuids="false" 
+      GenerateGuidsNow="true" ToolPath="$(WixToolPath)" 
+      PreprocessorVariable="var.BasePathBin" />
+    <HeatDirectory 
+      OutputFile="AddInsComponentsGenerated.wxs" 
+      DirectoryRefId="INSTALLFOLDERADDINS" 
+      ComponentGroupName="PublishedComponentsAddIns" 
+      SuppressCom="true" 
+      Directory="..\..\main\build\AddIns\" 
+      SuppressFragments="true" 
+      SuppressRegistry="true" 
+      SuppressRootDirectory="true" 
+      AutoGenerateGuids="false" 
+      GenerateGuidsNow="true" 
+      ToolPath="$(WixToolPath)" 
+      PreprocessorVariable="var.BasePathAddIns" />
+    <HeatDirectory 
+      OutputFile="DataComponentsGenerated.wxs" 
+      DirectoryRefId="INSTALLFOLDERDATA" 
+      ComponentGroupName="PublishedComponentsData" 
+      SuppressCom="true" 
+      Directory="..\..\main\build\Data\" 
+      SuppressFragments="true" 
+      SuppressRegistry="true"
+      SuppressRootDirectory="true"
+      AutoGenerateGuids="false"
+      GenerateGuidsNow="true"
+      ToolPath="$(WixToolPath)"
+      PreprocessorVariable="var.BasePathData" />
+  </Target>
+</Project>

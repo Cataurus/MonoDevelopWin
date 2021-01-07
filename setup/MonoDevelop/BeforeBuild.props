@@ -1,6 +1,5 @@
 ﻿<Project>
   <Target Name="BeforeBuild">
-    <Exec Command="del bin\$(Configuration)\*.msi" />
     <!--  Get Version-->
     <GetAssemblyIdentity AssemblyFiles="..\..\main\build\bin\monodevelop.exe">
       <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />

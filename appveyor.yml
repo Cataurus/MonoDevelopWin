@@ -25,5 +25,5 @@ build_script:
 
     cd ..
 artifacts:
-- path: setup\MonoDevelop\bin\Debug
+- path: setup\MonoDevelop\bin\Debug\*.msi
 test: off

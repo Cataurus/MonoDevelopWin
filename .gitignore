@@ -283,3 +283,4 @@ main/po/StripMnemonics.exe
 /main/MonoDevelopBuild.Summary.log
 *.msi
 *.wixpdb
+main/MonoDevelopSetup.log

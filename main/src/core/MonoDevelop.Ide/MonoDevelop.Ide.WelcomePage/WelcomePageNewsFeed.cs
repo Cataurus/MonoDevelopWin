@@ -79,9 +79,11 @@ namespace MonoDevelop.Ide.WelcomePage
 		protected virtual IEnumerable<Gtk.Widget> OnLoadNews (XElement news)
 		{
 			foreach (var child in news.Elements ()) {
-				if (child.Name != "link" && child.Name != "Link")
-					throw new Exception ("Unexpected child '" + child.Name + "'");
-				yield return new WelcomePageFeedItem (child);
+
+				if (child.Name == "item") {
+					yield return new WelcomePageFeedItem (child);
+				}
+
 			}
 		}
 
@@ -106,6 +108,14 @@ namespace MonoDevelop.Ide.WelcomePage
 			
 			try {
 				var news = GetNewsXml ();
+
+				foreach (var child in news.Elements ()) {
+					if (child.Name == "channel") {
+						news = child;
+						break;
+					}
+				}
+
 				if (news.FirstNode == null) {
 					var label = new Label (GettextCatalog.GetString ("No news found.")) { Xalign = 0, Xpad = 6 };
 					label.Accessible.Name = "WelcomePage.NewsFeed.NoNews";
@@ -158,7 +168,7 @@ namespace MonoDevelop.Ide.WelcomePage
 
 			FileService.UpdateDownloadedCacheFile (newsUrl, CacheFile, s => {
 				using (var reader = XmlReader.Create (s, GetSafeReaderSettings ())) {
-					return reader.ReadToDescendant ("links");
+					return reader.ReadToDescendant ("channel");
 				}
 			}).ContinueWith (t => {
 				try {

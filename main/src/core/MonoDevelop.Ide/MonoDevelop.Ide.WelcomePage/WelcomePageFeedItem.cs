@@ -81,24 +81,30 @@ namespace MonoDevelop.Ide.WelcomePage
 			: this ()
 		{
 			this.iconSize = iconSize;
-			
-			string title = (string)(el.Attribute ("title") ?? el.Attribute ("_title"));
+
+			string title = (string)(el.Element ("title").Value ?? el.Element ("_title").Value);
+
 			if (string.IsNullOrEmpty (title))
 				throw new InvalidOperationException ("Link is missing title");
+
 			this.text = GettextCatalog.GetString (title);
-			
-			subtitle = (string)el.Attribute ("pubDate");
+
+			subtitle = (string)el.Element ("pubDate").Value;
+
 			SetDate (subtitle);
 
-			string href = (string)el.Attribute ("href");
+			string href = (string)el.Element ("link").Value;
+
 			if (string.IsNullOrEmpty (href))
-				throw new InvalidOperationException ("Link is missing href");
+				throw new InvalidOperationException ("Item is missing link");
+
 			this.LinkUrl = href;
-			
-			string desc = (string)(el.Attribute ("desc") ?? el.Attribute ("_desc"));
+
+			string desc = (string)(el.Element ("description").Value ?? el.Element ("_description").Value);
 			desc = CleanHtml (desc);
 
 			if (!string.IsNullOrEmpty (desc)) {
+
 				desc = desc.Replace (" [...]", "...");
 				desc = GettextCatalog.GetString (desc);
 
@@ -110,17 +116,30 @@ namespace MonoDevelop.Ide.WelcomePage
 
 				this.desc = desc;
 			}
-			
-			string tooltip = (string) (el.Attribute ("tooltip") ?? el.Attribute ("_tooltip"));
-			if (!string.IsNullOrEmpty (tooltip))
-				this.TooltipText = GettextCatalog.GetString (tooltip);
-			else
+
+			try {
+
+				string tooltip = (string)(el.Element ("tooltip").Value ?? el.Attribute ("_tooltip").Value);
+
+				if (!string.IsNullOrEmpty (tooltip))
+					this.TooltipText = GettextCatalog.GetString (tooltip);
+
+			} catch (Exception) {
+
 				this.TooltipText = GetLinkTooltip (href);
-			
-			string icon = (string) el.Attribute ("icon");
-			if (!string.IsNullOrEmpty (icon))
-				this.icon = icon;
-			
+
+			}
+
+			try {
+				string icon = (string)el.Element ("icon").Value;
+				if (!string.IsNullOrEmpty (icon))
+					this.icon = icon;
+			} catch (Exception) {
+
+			}
+
+
+
 			UpdateLabel (false);
 			UpdateImage ();
 		}

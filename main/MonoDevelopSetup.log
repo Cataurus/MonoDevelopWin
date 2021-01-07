@@ -1,4 +1,4 @@
-Der Buildvorgang wurde am 07.01.2021 08:23:45 gestartet.
+Der Buildvorgang wurde am 07.01.2021 11:24:28 gestartet.
 Projekt "D:\Github\monodevelop\setup\setup.sln" auf Knoten "1" (Standardziele).
 Erstellung mit der Toolsversion "15.0".
 Ziel "ValidateSolutionConfiguration" in Datei "D:\Github\monodevelop\setup\setup.sln.metaproj" aus Projekt "D:\Github\monodevelop\setup\setup.sln" (Einstiegspunkt):
@@ -305,7 +305,7 @@ Ausführen der WriteLinesToFile-Aufgabe beendet.
 Die Erstellung des Ziels "IncrementalClean" im Projekt "MonoDevelopSetup.wixproj" ist abgeschlossen.
 Das Ziel "PostBuildEvent" wurde übersprungen, da die Bedingung "false" war . ( '$(PostBuildEvent)' != '' and
       ( '$(RunPostBuildEvent)' != 'OnOutputUpdated' or '$(_TargetOutputTimestampBeforeCompileAndLink)' != '$(_TargetOutputTimestampAfterCompileAndLink)' )) wurde als ( '' != '' and
-      ( '' != 'OnOutputUpdated' or '' != '2021-01-07 08:24:09.4780000' )) ausgewertet.
+      ( '' != 'OnOutputUpdated' or '' != '2021-01-07 11:24:51.9810000' )) ausgewertet.
 Ziel "CoreBuild" in Datei "C:\Program Files (x86)\MSBuild\Microsoft\WiX\v3.x\wix2010.targets" aus Projekt "D:\Github\monodevelop\setup\MonoDevelop\MonoDevelopSetup.wixproj" (Ziel "Build" ist davon abhängig):
 Die Erstellung des Ziels "CoreBuild" im Projekt "MonoDevelopSetup.wixproj" ist abgeschlossen.
 Ziel "AfterBuild" in Projekt "D:\Github\monodevelop\setup\MonoDevelop\MonoDevelopSetup.wixproj" (Ziel "Build" ist davon abhängig):
@@ -332,4 +332,4 @@ Der Buildvorgang wurde erfolgreich ausgeführt.
     0 Warnung(en)
     0 Fehler
 
-Verstrichene Zeit 00:00:35.21
+Verstrichene Zeit 00:00:34.75

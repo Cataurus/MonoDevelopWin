@@ -3,19 +3,19 @@
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDERDATA">
             <Directory Id="dirA00A9873F5B535DE79B2D4BBB505533B" Name="options">
-                <Component Id="cmp5CEF1A27F550F546781FE2F35FA7E89A" Guid="{2B63BC42-F9EC-400A-8F9D-157F92670252}">
+                <Component Id="cmp5CEF1A27F550F546781FE2F35FA7E89A" Guid="{7F54BDC8-E798-4BA3-B224-9F30027468DE}">
                     <File Id="fil224C57F6E36D3CD625BE195A2B6EFEF9" KeyPath="yes" Source="$(var.BasePathData)\options\DefaultEditingLayout.xml" />
                 </Component>
-                <Component Id="cmp7CE5D90A6C50C2F94B99F24435F8FD73" Guid="{A3DA53F6-3F7C-40E2-A7E0-20E630900597}">
+                <Component Id="cmp7CE5D90A6C50C2F94B99F24435F8FD73" Guid="{C36251E0-6105-4894-BE22-FA7FCD5F0ADD}">
                     <File Id="filC2DFBB52E9C085A12D5900EAB7EED93A" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelop-templates.xml" />
                 </Component>
-                <Component Id="cmp47E73BC991FDA309A5E1829FC74EA594" Guid="{92A47D9E-E9C0-4250-ACAD-E37A6DAD64E1}">
+                <Component Id="cmp47E73BC991FDA309A5E1829FC74EA594" Guid="{5442E5B0-D6E3-47D4-92FD-97CF9629B66F}">
                     <File Id="filA89E8815D76F311B1136ADA4EAE70E87" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelop-tools.xml" />
                 </Component>
-                <Component Id="cmp9B1BBEC9DC7FB760CA3743622812AD33" Guid="{9871844A-1CD5-42BB-8A3E-97B9A9FD9B02}">
+                <Component Id="cmp9B1BBEC9DC7FB760CA3743622812AD33" Guid="{9D7C37E4-7547-46C8-A0E5-485539B6D581}">
                     <File Id="fil402B388298956B9D60212FEEF3D50AF2" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelopProperties.xml" />
                 </Component>
-                <Component Id="cmp5D341981342F27D07D7CCEB10F9184A9" Guid="{BE805C70-27C9-4598-977A-42CB89D835EC}">
+                <Component Id="cmp5D341981342F27D07D7CCEB10F9184A9" Guid="{32C7281F-CF0E-49BF-8B12-EE7B55E0F289}">
                     <File Id="fil6015D5C324D10E44709B565C0D2A44E3" KeyPath="yes" Source="$(var.BasePathData)\options\TipsOfTheDay.xml" />
                 </Component>
             </Directory>

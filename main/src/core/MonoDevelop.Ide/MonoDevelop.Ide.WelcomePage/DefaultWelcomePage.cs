@@ -47,10 +47,10 @@ namespace MonoDevelop.Ide.WelcomePage
 
 			var row1 = new WelcomePageRow ();
 			row1.PackStart (new WelcomePageButtonBar (
-				new WelcomePageBarButton ("MonoDevelop.com", "http://www.monodevelop.com", "welcome-link-md-16.png"),
-				new WelcomePageBarButton (GettextCatalog.GetString ("Documentation"), "http://www.go-mono.com/docs", "welcome-link-info-16.png"),
-				new WelcomePageBarButton (GettextCatalog.GetString ("Support"), "http://monodevelop.com/index.php?title=Help_%26_Contact", "welcome-link-support-16.png"),
-				new WelcomePageBarButton (GettextCatalog.GetString ("Q&A"), "http://stackoverflow.com/questions/tagged/monodevelop", "welcome-link-chat-16.png")
+				new WelcomePageBarButton ("MonoDevelop.com", "https://www.monodevelop.com", "welcome-link-md-16.png"),
+				new WelcomePageBarButton (GettextCatalog.GetString ("Documentation"), "https://www.go-mono.com/docs", "welcome-link-info-16.png"),
+				new WelcomePageBarButton (GettextCatalog.GetString ("Support"), "https://monodevelop.com/index.php?title=Help_%26_Contact", "welcome-link-support-16.png"),
+				new WelcomePageBarButton (GettextCatalog.GetString ("Q&A"), "https://stackoverflow.com/questions/tagged/monodevelop", "welcome-link-chat-16.png")
 				)
 			);
 			row1.Accessible.SetShouldIgnore (true);
@@ -69,6 +69,25 @@ namespace MonoDevelop.Ide.WelcomePage
 			);
 			row2.Accessible.SetShouldIgnore (true);
 			mainCol.PackStart (row2, false, false, 0);
+#if WIN32
+
+			var row3 = new WelcomePageRow ();
+			row3.PackStart (new WelcomePageButtonBar (
+				new WelcomePageBarButton ("MonoDevelop by Github", "https://github.com/mono/monodevelop", "welcome-link-mark-16.png"),
+				new WelcomePageBarButton ("DotDevelop.com", "https://github.com/dotdevelop/dotdevelop", "welcome-link-mark-16.png"),
+				new WelcomePageBarButton ("Buildbranch for Win", "https://github.com/cataurus/monodevelopwin", "welcome-link-mark-16.png")
+				)
+			);
+#else
+			var row3 = new WelcomePageRow ();
+			row3.PackStart (new WelcomePageButtonBar (
+				new WelcomePageBarButton ("MonoDevelop by Github", "https://github.com/mono/monodevelop", "welcome-link-mark-16.png"),
+				new WelcomePageBarButton ("DotDevelop.com", "https://github.com/dotdevelop/dotdevelop", "welcome-link-mark-16.png")
+				)
+			);
+#endif
+			row3.Accessible.SetShouldIgnore (true);
+			mainCol.PackStart (row3, false, false, 0);
 
 			parent.Add (mainAlignment);
 		}

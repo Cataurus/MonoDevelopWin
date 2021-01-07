@@ -3322,6 +3322,18 @@
     <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\welcome-open-solution-16~dark%402x.png">
       <LogicalName>welcome-open-solution-16~dark@2x.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\welcome-link-github-16.png">
+      <LogicalName>welcome-link-mark-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\welcome-link-github-16%402x.png" >
+      <LogicalName>welcome-link-mark-16%402x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\welcome-link-github-16~dark.png" >
+      <LogicalName>welcome-link-mark-16~dark.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\welcome-link-github-16~dark%402x.png" >
+      <LogicalName>welcome-link-mark-16~dark%402x.png</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="icons\link-overlay-16.png">
       <LogicalName>link-overlay-16.png</LogicalName>
     </EmbeddedResource>
@@ -10021,14 +10033,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MonoDevelop.Components.MainToolbar\Theme\" />
-    <Folder Include="MonoDevelop.Components\Xwt\" />
-    <Folder Include="MonoDevelop.Components.AtkCocoaHelper\" />
-    <Folder Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\Markdown\" />
-    <Folder Include="MonoDevelop.Ide.BuildOutputView\" />
     <Folder Include="MonoDevelop.Ide.EditorConfig\" />
-    <Folder Include="Gui\" />
-    <Folder Include="MonoDevelop.Ide.RoslynServices\" />
-    <Folder Include="MonoDevelop.Ide.RoslynServices.Options\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="gtkrc">

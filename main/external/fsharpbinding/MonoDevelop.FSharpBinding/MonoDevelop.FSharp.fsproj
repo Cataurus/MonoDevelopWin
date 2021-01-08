@@ -17,9 +17,8 @@
     <SignAssembly>true</SignAssembly>
     <OtherFlags>--publicsign</OtherFlags>
     <AssemblyOriginatorKeyFile>..\..\..\msbuild\MonoDevelop-Public.snk</AssemblyOriginatorKeyFile>
-    <FscDebugType>full</FscDebugType>
+    <FscDebugType>portable</FscDebugType>
     <FscDebugFileExt>.mdb</FscDebugFileExt>
-    <Deterministics>false</Deterministics>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>

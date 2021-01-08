@@ -15,9 +15,9 @@ Directory organization
 There are two main directories:
 
  * `main`: The core MonoDevelop assemblies and add-ins (all in a single
-    tarball/package).
+	tarball/package).
  * `extras`: Additional add-ins (each add-in has its own
-    tarball/package).
+	tarball/package).
 
 Compiling
 ---------

@@ -34,12 +34,19 @@
 
 		<MajorUpgrade
 			AllowDowngrades="no"
-			AllowSameVersionUpgrades="no"
+			AllowSameVersionUpgrades="yes"
 			DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
 		
 		<MediaTemplate 
 			EmbedCab="yes"
 			CabinetTemplate="media{0}.cab"/>
+
+		<Property Id="GTKSHARPVERSION">
+			<RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
+		</Property>
+		<Condition Message="Gtk# version 2.12.9 or greater must be installed.">
+			<![CDATA[GTKSHARPVERSION >= "2.12" OR REMOVE ~= "ALL"]]>
+		</Condition>
 		
 		<Icon 
 			Id="icon.ico" 

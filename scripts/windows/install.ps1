@@ -47,14 +47,6 @@ $targetGetText = $dir + '\gettext-0.14.4.exe'
 Write-host " "
 Write-Host "Installiere MonoLib ..."
 cmd /c start /wait msiexec /i "$targetGetText" /quiet /qn /norestart 
-
-#Write-host " "
-#Write-Host "Lade MonoDoc herunter..."
-#$targetMonoDoc = $dir + '\monodoc.dll'
-
-#(new-object net.webclient).DownloadFile('https://github.com/lextm/monodevelop-windows/blob/master/monodoc.dll', $targetMonoDoc)
-# & 'C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\gacutil.exe' /nologo /i $targetMonoDoc
-
 Write-host " "
 
 if(Test-Path "$monBinPath") {
@@ -62,7 +54,6 @@ if(Test-Path "$monBinPath") {
 }
 
 Write-host " "
-$monoExe = $monBinPath+"mono.exe"
 & 'C:\Program Files (x86)\Mono\bin\mono.exe' --version
 Write-host " "
 
@@ -110,9 +101,6 @@ if (Test-Path -Path "$WindowsSDK")
         write-host "$name"
         & 'C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\gacutil.exe' /nologo /i $item
     }
-
-    #$pfad = $monoBasePath + '\lib\atk\atk-sharp.dll'
-    #& 'C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\gacutil.exe' /nologo /i $pfad
 
     Write-host "Mono Bibliotheken werden registriert"
     Write-host ""

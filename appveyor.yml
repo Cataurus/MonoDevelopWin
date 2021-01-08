@@ -16,7 +16,7 @@ environment:
   PATH: ${ProgramFiles(x86)}\Mono\bin;${ProgramFiles(x86)}\GtkSharp\2.12\bin;${PATH}
   GTK_BASEPATH: ${ProgramFiles(x86)}\GtkSharp\2.1.12\
 install:
-- ps: ./install.ps1
+- ps: ./scripts\windows\install.ps1
 build_script:
 - cmd: >-
     cd main

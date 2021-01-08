@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="..\..\..\MonoDevelop.props" />
   <PropertyGroup>
@@ -734,8 +734,12 @@
     <Compile Include="MonoDevelop.Projects.MSBuild\FileUtilities.cs" />
     <Compile Include="MonoDevelop.Projects\ProgressEvent.cs" />
     <Compile Include="MonoDevelop.Core.Setup\UpdateChannel.cs" />
-    <Compile Include="MonoDevelop.FSW\OSX\FileSystemWatcher.cs" />
-    <Compile Include="MonoDevelop.FSW\OSX\FileSystemWatcher.OSX.cs" />
+    <Compile Include="MonoDevelop.FSW\OSX\FileSystemWatcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MonoDevelop.FSW\OSX\FileSystemWatcher.OSX.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MonoDevelop.FSW\OSX\Interop.CoreFoundation.cs" />
     <Compile Include="MonoDevelop.FSW\OSX\Interop.Error.cs" />
     <Compile Include="MonoDevelop.FSW\OSX\Interop.EventStream.cs" />
@@ -752,8 +756,12 @@
     <Compile Include="MonoDevelop.FSW\OSX\SafeCreateHandle.OSX.cs" />
     <Compile Include="MonoDevelop.FSW\OSX\SafeEventStreamHandle.OSX.cs" />
     <Compile Include="MonoDevelop.FSW\OSX\SR.cs" />
-    <Compile Include="MonoDevelop.FSW\FileSystemWatcher.cs" />
-    <Compile Include="MonoDevelop.FSW\Mono\FileSystemWatcher.cs" />
+    <Compile Include="MonoDevelop.FSW\FileSystemWatcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MonoDevelop.FSW\Mono\FileSystemWatcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MonoDevelop.Core\StringBuilderCache.cs" />
     <Compile Include="MonoDevelop.Core\ObjectPool.cs" />
     <Compile Include="MonoDevelop.Core\SharedPools.cs" />

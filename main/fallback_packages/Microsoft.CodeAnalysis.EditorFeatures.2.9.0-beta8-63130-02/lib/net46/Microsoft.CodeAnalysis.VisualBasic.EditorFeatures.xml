@@ -1,0 +1,294 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Microsoft.CodeAnalysis.VisualBasic.EditorFeatures
+</name>
+</assembly>
+<members>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.AutomaticEndConstructCorrection.AutomaticEndConstructCorrector">
+ <summary>
+ Tracks user's interaction with editor
+ </summary>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.AutomaticEndConstructCorrection.LetterOnlyTrackingSpan">
+ <summary>
+ This is a workaround until Jason checkin actual custom tracking span
+ </summary>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.AutomaticEndConstructCorrection.ViewCreationListener">
+ <summary>
+ Tracks user's interaction with editor
+ </summary>
+</member>
+<member name="F:Microsoft.CodeAnalysis.Editor.VisualBasic.ContentType.ContentTypeDefinitions.VisualBasicContentTypeDefinition">
+ <summary>
+ Definition of the primary VB content type.
+ </summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.EndConstructGeneration.EndConstructState.NewLineCharacter">
+ <summary>
+ The new line character that should be used when spitting lines of code.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.EndConstructGeneration.EndConstructStatementVisitor.TryApplyOnForStatement(Microsoft.CodeAnalysis.VisualBasic.Syntax.StatementSyntax)">
+ <param name="forStatement">The ForStatementSyntax or ForEachStatementSyntax for the loop.</param>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.EndConstructGeneration.EndConstructStatementVisitor.ConvertSingleLineStatementsToMultiLineStatements(Microsoft.CodeAnalysis.SyntaxList{Microsoft.CodeAnalysis.VisualBasic.Syntax.StatementSyntax},System.String)">
+ <summary>
+ Given a separatedSyntaxList of statements separated by colons, converts them to a
+ separate syntax list of statements separated by newlines
+ </summary>
+ <param name="statements">The list of statements to convert.</param>
+ <param name="indentedWhitespace">The whitespace to indent with.</param>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.EndConstructGeneration.EndConstructStatementVisitor.NeedsGetAccessor(Microsoft.CodeAnalysis.VisualBasic.Syntax.PropertyStatementSyntax,Microsoft.CodeAnalysis.VisualBasic.Syntax.AccessorBlockSyntax)">
+ <summary>
+ Given a property declaration, determines if a Get accessor needs to be generated. This checks to see if any
+ getters already exist.
+ </summary>
+ <param name="accessorToIgnore">An existing getter to ignore. When we are checking for existing getters, we
+ might be in the middle of typing one that would be a false positive. </param>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.EndConstructGeneration.EndConstructStatementVisitor.NeedsSetAccessor(Microsoft.CodeAnalysis.VisualBasic.Syntax.PropertyStatementSyntax,Microsoft.CodeAnalysis.VisualBasic.Syntax.AccessorBlockSyntax)">
+ <summary>
+ Given a property declaration, determines if a Set accessor needs to be generated. This checks to see if any
+ getters already exist.
+ </summary>
+ <param name="accessorToIgnore">An existing getter to ignore. When we are checking for existing getters, we
+ might be in the middle of typing one that would be a false positive. </param>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.KeywordHighlighting.ForLoopBlockHighlighter.GetNextStatementMatchingForBlock(Microsoft.CodeAnalysis.VisualBasic.Syntax.ForOrForEachBlockSyntax)">
+ <summary>
+ Find the Next statement that closes this For block (if one exists). Normally that
+ would just be the one associated with forBlock, but if we have a "Next a, b" 
+ statement that is closing multiple loops, the Next statement is attached to the 
+ innermost matching loop.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.KeywordHighlighting.ForLoopBlockHighlighter.GetForBlocksMatchingNextStatement(Microsoft.CodeAnalysis.VisualBasic.Syntax.NextStatementSyntax)">
+ <summary>
+ Returns all For blocks logically matching the Next statement, ordered from outermost to 
+ innermost. Do not consider the actual names of the loop variables because highlighting 
+ should work even if the wrong identifier names are listed. 
+ </summary>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitBufferManager">
+ <summary>
+ This class watches for buffer-based events, tracks the dirty regions, and invokes the formatter as appropriate
+ </summary>
+</member>
+<member name="F:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitBufferManager._dirtyState">
+ <summary>
+ The tracking span which is the currently "dirty" region in the buffer. May be null if there is no dirty region.
+ </summary>
+</member>
+<member name="F:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitBufferManager._suppressions">
+ <summary>
+ The number of times BeginSuppressingCommits() has been called.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitBufferManager.CommitDirty(System.Boolean,System.Threading.CancellationToken)">
+ <summary>
+ Commits any dirty region, if one exists.
+
+ To improve perf, passing false to isExplicitFormat will avoid semantic checks when expanding
+ the formatting span to an entire block
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitBufferManager.BeginSuppressingCommits">
+ <summary>
+ Suppresses future commits, causing all calls to CommitDirty() to be a simple no-op, even
+ if there is a dirty span.
+ </summary>
+ <returns>An IDisposable that should be disposed when the caller wants to resume
+ submissions.</returns>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitCommandHandler">
+ <summary>
+ Watches for the enter key being pressed, and triggers a commit in response.
+ </summary>
+ <remarks>This particular command filter acts as a "wrapper" around any other command, as it
+ wishes to invoke the commit after whatever processed the enter is done doing what it's
+ doing.</remarks>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.CommitViewManager">
+ <summary>
+ This class watches for view-based events in relation to a specific subject buffer and passes along commit operations.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.ContainingStatementInfo.GetInfo(Microsoft.VisualStudio.Text.SnapshotPoint,Microsoft.CodeAnalysis.SyntaxTree,System.Threading.CancellationToken)">
+ <summary>
+ This function returns the "logical" statement that a given point is in. "Logical" in
+ this case means "the smallest unit the user probably thinks as a statement", or "the
+ thing we should format when you leave it."
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineCommit.ICommitFormatter.CommitRegion(Microsoft.VisualStudio.Text.SnapshotSpan,System.Boolean,System.Boolean,Microsoft.VisualStudio.Text.SnapshotSpan,Microsoft.VisualStudio.Text.ITextSnapshot,Microsoft.CodeAnalysis.SyntaxTree,System.Threading.CancellationToken)">
+ <summary>
+ Commits a region by formatting and case correcting it. It is assumed that an
+ ITextUndoTransaction is open the underlying text buffer, as multiple edits may be done
+ by this function. Further, if the operation is cancelled, the buffer may be left in a
+ partially committed state that must be rolled back by the transaction.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineSeparators.VisualBasicLineSeparatorService.IsSeparableBlock(Microsoft.CodeAnalysis.SyntaxNodeOrToken)">
+ <summary>Node types that are interesting for line separation.</summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineSeparators.VisualBasicLineSeparatorService.IsSeparableContainer(Microsoft.CodeAnalysis.SyntaxNode)">
+ <summary>Node types that may contain separable blocks.</summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineSeparators.VisualBasicLineSeparatorService.GetLineSeparatorsAsync(Microsoft.CodeAnalysis.Document,Microsoft.CodeAnalysis.Text.TextSpan,System.Threading.CancellationToken)">
+ <summary>
+ Given a syntaxTree returns line separator spans. The operation may take fairly long time
+ on a big syntaxTree so it is cancellable.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.LineSeparators.VisualBasicLineSeparatorService.ProcessNodeList``1(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.SyntaxList{``0},System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan},System.Threading.CancellationToken)">
+ <summary>
+ If node is separable and not the last in its container => add line separator after the node
+ If node is separable and not the first in its container => ensure separator before the node
+ last separable node in Program needs separator after it.
+ </summary>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.NavigationBar.VisualBasicNavigationBarItemService.CreateItemForEvents(Microsoft.CodeAnalysis.INamedTypeSymbol,System.Int32,Microsoft.CodeAnalysis.ITypeSymbol,Microsoft.CodeAnalysis.IPropertySymbol,Microsoft.CodeAnalysis.SemanticModel,System.Boolean,Microsoft.CodeAnalysis.LanguageServices.ISymbolDeclarationService,System.Threading.CancellationToken)">
+ <summary>
+ Creates the left-hand entry and right-hand entries for a list of events.
+ </summary>
+ <param name="containingType">The type that contains the methods attached to the events.
+ For items that will generate new methods, they will be generated into this
+ class.</param>
+ <param name="eventType">The type to list the events of. This is either equal to
+ containingType if it's listing the event handlers for the base types, or else it's the
+ type of the eventContainer.</param>
+ <param name="eventContainer">If this is an entry for a WithEvents member, the WithEvents
+ property itself.</param>
+</member>
+<member name="M:Microsoft.CodeAnalysis.Editor.VisualBasic.Utilities.NamedTypeSymbolExtensions.IsDesignerGeneratedTypeWithInitializeComponent(Microsoft.CodeAnalysis.INamedTypeSymbol,Microsoft.CodeAnalysis.Compilation)">
+ <summary>
+ Determines if the default constructor emitted by the compiler would contain an InitializeComponent() call.
+ </summary>
+</member>
+<member name="T:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources._0_Events">
+<summary>
+  Looks up a localized string similar to ({0} Events).
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Add_any_initialization_after_the_InitializeComponent_call">
+<summary>
+  Looks up a localized string similar to Add any initialization after the InitializeComponent() call..
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Case_Correction">
+<summary>
+  Looks up a localized string similar to Case Correction.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Committing_line">
+<summary>
+  Looks up a localized string similar to Committing line.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Correcting_word_casing">
+<summary>
+  Looks up a localized string similar to Correcting word casing....
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.End_Construct">
+<summary>
+  Looks up a localized string similar to End Construct.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Format_Document">
+<summary>
+  Looks up a localized string similar to Format Document.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Format_on_Save">
+<summary>
+  Looks up a localized string similar to Format on Save.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Format_Paste">
+<summary>
+  Looks up a localized string similar to Format Paste.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Formatting_Document">
+<summary>
+  Looks up a localized string similar to Formatting Document....
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Formatting_pasted_text">
+<summary>
+  Looks up a localized string similar to Formatting pasted text....
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Generate_Member">
+<summary>
+  Looks up a localized string similar to Generate Member.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Implement_Abstract_Class_Or_Interface">
+<summary>
+  Looks up a localized string similar to Implement Abstract Class Or Interface.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Insert_new_line">
+<summary>
+  Looks up a localized string similar to Insert new line.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Line_commit">
+<summary>
+  Looks up a localized string similar to Line commit.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.New_">
+<summary>
+  Looks up a localized string similar to New.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.not_supported">
+<summary>
+  Looks up a localized string similar to not supported.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Paste">
+<summary>
+  Looks up a localized string similar to Paste.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Smart_Indenting">
+<summary>
+  Looks up a localized string similar to Smart Indenting.
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.This_call_is_required_by_the_designer">
+<summary>
+  Looks up a localized string similar to This call is required by the designer..
+</summary>
+</member>
+<member name="P:Microsoft.CodeAnalysis.Editor.VisualBasic.VBEditorResources.VBEditorResources.Visual_Basic_Pretty_List">
+<summary>
+  Looks up a localized string similar to Visual Basic Pretty List.
+</summary>
+</member>
+</members>
+</doc>

@@ -1,0 +1,31 @@
+{
+  "symbolInfo": {
+    "TargetFrameworkOverride": {
+      "isHidden": "true",
+      "longName": "target-framework-override",
+      "shortName": ""
+    },
+    "IncludeApplicationInsights": {
+      "isHidden": "true"
+    },
+    "Framework": {
+      "longName": "framework"
+    },
+    "skipRestore": {
+      "longName": "no-restore",
+      "shortName": ""
+    },
+    "KestrelPort": {
+      "isHidden": true
+    },
+    "IISExpressPort": {
+      "isHidden": true
+    },
+    "IncludeLaunchSettings": {
+      "isHidden": true
+    }
+  },
+  "UsageExamples": [
+    "--framework netcoreapp1.1"
+  ]
+}

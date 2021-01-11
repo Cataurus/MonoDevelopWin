@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<TestTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <TestType>
+        <Test Id="{37e36796-fb51-4610-8d5c-e00ceaa68b9f}" NameId="#3117" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.LoadTestPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.LoadTest.SCodedWebTestService, Microsoft.VisualStudio.QualityTools.LoadTestPackage, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.WebTest.CodedWebTestTip, Microsoft.VisualStudio.QualityTools.Tips.WebLoadTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{00000000-0000-0000-0000-000000000000}">
+            <Extensions>
+                <Extension Name=".dll" IconId="4001" />
+                <Extension Name=".exe" IconId="4001" />
+            </Extensions>
+        </Test>
+        <Test Id="{4e7599fa-5ecb-43e9-a887-cd63cf72d207}" NameId="#3101" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.LoadTestPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.LoadTest.SDeclarativeWebTestService, Microsoft.VisualStudio.QualityTools.LoadTestPackage, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.WebTest.WebTestTip, Microsoft.VisualStudio.QualityTools.Tips.WebLoadTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{303159bd-2ac9-4aa7-a665-0b87c4f0aa50}">
+            <Extensions>
+                <Extension Name=".webtest" IconId="4001" />
+            </Extensions>
+        </Test>
+    </TestType>
+</TestTypes>

@@ -1,3 +1,31 @@
+[![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelop-.NET%20Desktop-CI)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=10) [![Build status](https://ci.appveyor.com/api/projects/status/rwi8l7wukyhxiofw/branch/main?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/main)
+___
+
+# MonoDevelop for Windows
+
+This is a build fork of the original [***MonoDevelop***](https://github.com/mono/monodevelop) project to provide an installation package for Windows.
+This is currently based on the tag: monodevelop-7.6.9.22.
+Some changes have been made to resolve library dependencies and the project to build the setup program is completely new. Also there is now a powershell script
+which installs the prerequisites for the build.
+
+## Install
+
+Installer load from [here](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/MonoDevelop-7.6.9.22-x86-Debug.msi)
+
+## Compiling
+
+* clone this fork ( git clone https://github.com/Cataurus/MonoDevelopWin.git)
+* open a powershell-terminal and execute the powershell-scriptfile *install.ps1* from the directory *scripts/windows*.
+This will install all prerequisite programs and do some fixes to compile Monodevelop
+to build.
+* then change in this terminal, to the directory *main* and run 'winbuild.bat'
+* wait for completed build
+* you can then start the IDE *via winrun.bat*
+
+***I wish a lot of fun***
+
+### orginal readme
+___
 **MonoDevelop** is a full-featured integrated development environment (IDE) for mono using Gtk#.
 
 The MonoDevelop core is also the foundation for Visual Studio for Mac.  

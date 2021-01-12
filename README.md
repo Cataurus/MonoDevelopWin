@@ -15,6 +15,7 @@ Installer load from [here](https://github.com/Cataurus/MonoDevelopWin/releases/d
 
 ## Compiling
 
+* install Visual Studio 2017
 * clone this fork ( git clone https://github.com/Cataurus/MonoDevelopWin.git)
 * open a powershell-terminal and execute the powershell-scriptfile *install.ps1* from the directory *scripts/windows*.
 This will install all prerequisite programs and do some fixes to compile Monodevelop

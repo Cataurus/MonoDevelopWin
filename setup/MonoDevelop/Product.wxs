@@ -3,7 +3,7 @@
 <?define ProductName="MonoDevelop"?>
 <?define ProductManufacturer="MonoDevelop Project"?>
 <?define ProductLanguage="1033"?>
-<?define ProductVersion="7.6.1.22"?>
+<?define ProductVersion="7.6.9.22"?>
 <?define ProductDescription="MonoDevelop for Windows"?>
 <?define ProductKeywords="ide, c#, v#, mono, monodevelop"?>
 <?define ProductComments=""Integrated IDE for C# and B# under Linux, Windows and Mac?>

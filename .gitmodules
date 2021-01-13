@@ -44,7 +44,6 @@
 [submodule "main/external/sharpsvn-binary"]
     path = main/external/sharpsvn-binary
     url = git://github.com/mono/sharpsvn-binary.git
-[submodule "main/external/xwt"]
-    path = main/external/xwt
-    url = git://github.com/mono/xwt
-    branch = d15-9
+[submodule "main/external/monomac"]
+    path = main/external/monomac
+    url = git://github.com/mono/monomac.git

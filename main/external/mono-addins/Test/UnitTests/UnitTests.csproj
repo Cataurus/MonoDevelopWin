@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="..\..\TargetFrameworks.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{1CD51E61-1985-4D22-9BFA-D14C8FC61B46}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>UnitTests</AssemblyName>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>UnitTests</RootNamespace>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\mono-addins.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <PackageReference Include="NUnit">
+      <Version>3.9.0</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter">
+      <Version>3.10.0</Version>
+    </PackageReference>
+    <PackageReference Include="Mono.Cecil" Version="0.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mono.Addins\Mono.Addins.csproj">
+      <Project>{91DD5A2D-9FE3-4C3C-9253-876141874DAD}</Project>
+      <Name>Mono.Addins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mono.Addins.CecilReflector\Mono.Addins.CecilReflector.csproj">
+      <Project>{42D1CE65-A14B-4218-B787-58AD7AA68513}</Project>
+      <Name>Mono.Addins.CecilReflector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mono.Addins.Setup\Mono.Addins.Setup.csproj">
+      <Project>{A85C9721-C054-4BD8-A1F3-0227615F0A36}</Project>
+      <Name>Mono.Addins.Setup</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TestExtensions.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestEvents.cs" />
+    <Compile Include="TestFileDatabase.cs" />
+    <Compile Include="TestLoadUnload.cs" />
+    <Compile Include="TestConditions.cs" />
+    <Compile Include="TestSetup.cs" />
+    <Compile Include="TestLocalization.cs" />
+    <Compile Include="AddinInformationTests.cs" />
+    <Compile Include="ExtensionModel\ComplexNode.cs" />
+    <Compile Include="ExtensionModel\GlobalInfoCondition.cs" />
+    <Compile Include="ExtensionModel\ISampleExtender.cs" />
+    <Compile Include="ExtensionModel\IWriter.cs" />
+    <Compile Include="ExtensionModel\IWriterWithMetadata.cs" />
+    <Compile Include="ExtensionModel\NodeWithAttribute.cs" />
+    <Compile Include="ExtensionModel\ParameterInfoCondition.cs" />
+    <Compile Include="ExtensionModel\SimpleExtensionAttribute.cs" />
+    <Compile Include="ExtensionModel\AttrExtensionWithManyNodes.cs" />
+    <Compile Include="ExtensionModel\MultiAssemblyTestExtensionPoint.cs" />
+    <Compile Include="TestLoadXmlAddinDescription.cs" />
+    <Compile Include="TestVerifyAddinDescription.cs" />
+    <Compile Include="TestAddinDescription.cs" />
+    <Compile Include="ExtensionModel\Properties.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="TestSetupService.cs" />
+    <Compile Include="ExtensionModel\GlobalInfoConditionAttribute.cs" />
+    <Compile Include="TestScan.cs" />
+    <Compile Include="TestScanDataFileGeneration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SimpleApp.addin.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test.addins">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestManifest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SupportFile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SampleAddins\AddRemoveTest1.addin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SampleAddins\AddRemoveTest2.addin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="TestManifest2.xml">
+      <LogicalName>TestManifest2.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestManifest3.xml">
+      <LogicalName>TestManifest3.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestManifest2-bis.xml">
+      <LogicalName>TestManifest2-bis.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

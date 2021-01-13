@@ -23,10 +23,6 @@
 [submodule "main/external/mdtestharness"]
     path = main/external/mdtestharness
     url = git://github.com/mono/mdtestharness.git
-[submodule "main/external/mono-addins"]
-    path = main/external/mono-addins
-    url = git://github.com/mono/mono-addins.git
-    branch = master
 [submodule "main/external/mono-tools"]
     path = main/external/mono-tools
     url = git://github.com/mono/mono-tools.git

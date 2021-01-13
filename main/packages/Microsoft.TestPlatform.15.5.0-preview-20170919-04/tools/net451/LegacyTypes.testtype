@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<TestTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <TestType>
+        <Test Id="{13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b}" NameId="#212" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.Tips.TuipPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.TestTypes.Unit.SUnitTestService, Microsoft.VisualStudio.QualityTools.Vsip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestTip, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{00000000-0000-0000-0000-000000000000}">
+            <Extensions>
+                <Extension Name=".dll" IconId="215" />
+                <Extension Name=".exe" IconId="215" />
+            </Extensions>
+            <SupportedHostAdapters>
+                <SupportedHostAdapter Type="ASP.NET" HostAdapter="ASP.NET Host Adapter" />
+            </SupportedHostAdapters>
+            <TestTypeExtensions>
+                <TestTypeExtension Name="CodedUITestAttribute" AttributeProvider="Microsoft.VisualStudio.TestTools.UITesting.CodedUITestAttribute, Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+            </TestTypeExtensions>
+        </Test>
+        <Test Id="{982b8c01-1a8a-48f5-b98a-67ee64bc8687}" NameId="#440" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.Tips.TuipPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.TestTypes.Generic.SGenericTestService, Microsoft.VisualStudio.QualityTools.Vsip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.TestTypes.Generic.GenericTestTip, Microsoft.VisualStudio.QualityTools.Tips.GenericTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{c050a6af-a22f-b534-f966-d0cb9a7fff37}">
+            <Extensions>
+                <Extension Name=".GenericTest" IconId="441" />
+            </Extensions>
+        </Test>
+        <Test Id="{ec4800e8-40e5-4ab3-8510-b8bf29b1904d}" NameId="#313" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.Tips.TuipPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.TestTypes.Ordered.SOrderedTestService, Microsoft.VisualStudio.QualityTools.Vsip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.TestTypes.Ordered.AutoSuiteTip, Microsoft.VisualStudio.QualityTools.Tips.OrderedTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{700218d8-f6f1-4ec3-be76-a35f72260503}">
+            <Extensions>
+                <Extension Name=".orderedtest" IconId="316" />
+            </Extensions>
+        </Test>
+    </TestType>
+</TestTypes>

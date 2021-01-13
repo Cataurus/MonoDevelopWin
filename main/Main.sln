@@ -337,7 +337,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.UserInterfaceTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.AspNetCore.Tests", "src\addins\MonoDevelop.AspNetCore\MonoDevelop.AspNetCore.Tests\MonoDevelop.AspNetCore.Tests.csproj", "{44FFFDDA-156F-49F9-AE6A-BA640C198B33}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{0FCD481A-873E-453C-8216-4EE7343FAEBD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E2E41DB6-1D0E-4FD8-91C1-7C4A22FC9537}"
+	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+		..\NuGet.config = ..\NuGet.config
+		..\README.md = ..\README.md
+		winbuild.bat = winbuild.bat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

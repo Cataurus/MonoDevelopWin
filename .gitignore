@@ -35,7 +35,6 @@ obj/
 /main/src/addins/PerformanceDiagnostics/UIThreadMonitorDaemon/bin
 /main/src/core/MonoDevelop.Core/BuildVariables.cs
 /scripts/configure.exe
-/main/packages
 /main/.nuget/
 pull-package.exe
 /main/tests/StressTest/TestProject/bin
@@ -281,3 +280,6 @@ main/po/StripMnemonics.exe
 /main/MonoDevelopBuild.JustErrors.log
 /main/MonoDevelopBuild.JustWarnings.log
 /main/MonoDevelopBuild.Summary.log
+*.msi
+*.wixpdb
+main/MonoDevelopSetup.log

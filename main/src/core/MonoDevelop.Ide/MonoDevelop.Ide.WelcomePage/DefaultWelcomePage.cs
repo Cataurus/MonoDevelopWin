@@ -70,6 +70,22 @@ namespace MonoDevelop.Ide.WelcomePage
 			row2.Accessible.SetShouldIgnore (true);
 			mainCol.PackStart (row2, false, false, 0);
 
+			var row3 = new WelcomePageRow ();
+
+
+			row3.PackStart (new WelcomePageButtonBar (
+				new WelcomePageBarButton ("MonoDevelop by Github", "https://github.com/mono/monodevelop", "welcome-link-github-16.png"),
+				new WelcomePageBarButton ("DotDevelop.com by Github", "https://github.com/dotdevelop/dotdevelop", "welcome-link-github-16.png")
+#if WIN32
+				, new WelcomePageBarButton ("WindowsBuildbranch", "https://github.com/cataurus/monodevelopwin", "welcome-link-github-16.png")
+#endif
+				)
+			);
+
+
+			row3.Accessible.SetShouldIgnore (true);
+			mainCol.PackStart (row3, false, false, 0);
+
 			parent.Add (mainAlignment);
 		}
 	}

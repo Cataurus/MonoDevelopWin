@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC764278-4141-483C-8643-2EA8C40373B2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GtkTestRunner</RootNamespace>
+    <AssemblyName>GtkTestRunner</AssemblyName>
+    <TestRunnerCommand>bin\GtkTestRunner.exe</TestRunnerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.core">
+      <HintPath>..\packages\NUnit.Runners.2.6.4\tools\lib\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\packages\NUnit.Runners.2.6.4\tools\lib\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit-console-runner">
+      <HintPath>..\packages\NUnit.Runners.2.6.4\tools\lib\nunit-console-runner.dll</HintPath>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="nunit.util">
+      <HintPath>..\packages\NUnit.Runners.2.6.4\tools\lib\nunit.util.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GtkTestRunner\Main.cs" />
+    <Compile Include="GtkTestRunner\AssemblyInfo.cs" />
+    <Compile Include="Tests\BoxTests.cs" />
+    <Compile Include="Tests\ButtonTests.cs" />
+    <Compile Include="Tests\CanvasTests.cs" />
+    <Compile Include="Tests\CheckBoxTests.cs" />
+    <Compile Include="Tests\ColorTests.cs" />
+    <Compile Include="Tests\ComboBoxEntryTests.cs" />
+    <Compile Include="Tests\ComboBoxTests.cs" />
+    <Compile Include="Tests\ConsoleTestRunner.cs" />
+    <Compile Include="Tests\ContainerTests.cs" />
+    <Compile Include="Tests\DatePickerTests.cs" />
+    <Compile Include="Tests\DrawingTests.cs" />
+    <Compile Include="Tests\ExpanderTests.cs" />
+    <Compile Include="Tests\FontTests.cs" />
+    <Compile Include="Tests\FrameTests.cs" />
+    <Compile Include="Tests\HBoxTests.cs" />
+    <Compile Include="Tests\HPanedTests.cs" />
+    <Compile Include="Tests\HSeparatorTests.cs" />
+    <Compile Include="Tests\ImageViewTests.cs" />
+    <Compile Include="Tests\LabelTests.cs" />
+    <Compile Include="Tests\ListBoxTests.cs" />
+    <Compile Include="Tests\ListViewTests.cs" />
+    <Compile Include="Tests\MatrixTests.cs" />
+    <Compile Include="Tests\NotebookTests.cs" />
+    <Compile Include="Tests\PanedTests.cs" />
+    <Compile Include="Tests\ProgressBarTests.cs" />
+    <Compile Include="Tests\RadioButtonTests.cs" />
+    <Compile Include="Tests\ReferenceImageManager.cs" />
+    <Compile Include="Tests\ReferenceImageVerifierDialog.cs" />
+    <Compile Include="Tests\ScrollbarTests.cs" />
+    <Compile Include="Tests\ScrollViewTests.cs" />
+    <Compile Include="Tests\SegmentedButtonTests.cs" />
+    <Compile Include="Tests\SliderTests.cs" />
+    <Compile Include="Tests\SpinButtonTests.cs" />
+    <Compile Include="Tests\SpinnerTests.cs" />
+    <Compile Include="Tests\TableTests.cs" />
+    <Compile Include="Tests\TextEntryTests.cs" />
+    <Compile Include="Tests\ToggleButtonTests.cs" />
+    <Compile Include="Tests\TransformTests.cs" />
+    <Compile Include="Tests\TreeViewTests.cs" />
+    <Compile Include="Tests\VBoxTests.cs" />
+    <Compile Include="Tests\VPanedTests.cs" />
+    <Compile Include="Tests\VScrollbar.cs" />
+    <Compile Include="Tests\VSeparatorTests.cs" />
+    <Compile Include="Tests\WidgetTests.cs" />
+    <Compile Include="Tests\WindowTests.cs" />
+    <Compile Include="Tests\XwtTest.cs" />
+    <Compile Include="Tests\InternalChildrenTests.cs" />
+    <Compile Include="Tests\LinkLabelTests.cs" />
+    <Compile Include="Tests\FormattedTextTests.cs" />
+    <Compile Include="GtkTests\GtkIntegrationTests.cs" />
+    <Compile Include="Tests\DrawingTestsBase.cs" />
+    <Compile Include="Tests\NinePatchTests.cs" />
+    <Compile Include="Tests\DialogTests.cs" />
+    <Compile Include="Tests\ScrollableWidgetTests.cs" />
+    <Compile Include="GtkTestRunner\GtkInit.cs" />
+    <Compile Include="GtkTests\PangoTests.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Xwt.Gtk\Xwt.Gtk.csproj">
+      <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
+      <Name>Xwt.Gtk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xwt\Xwt.csproj">
+      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
+      <Name>Xwt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GtkTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tests\ninep-ss.9.png">
+      <LogicalName>ninep-ss.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-st.9.png">
+      <LogicalName>ninep-st.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-ts.9.png">
+      <LogicalName>ninep-ts.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-tt.9.png">
+      <LogicalName>ninep-tt.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-ss%402x.9.png">
+      <LogicalName>ninep-ss@2x.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-st%402x.9.png">
+      <LogicalName>ninep-st@2x.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-ts%402x.9.png">
+      <LogicalName>ninep-ts@2x.9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\ninep-tt%402x.9.png">
+      <LogicalName>ninep-tt@2x.9.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

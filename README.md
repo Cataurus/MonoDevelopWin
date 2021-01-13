@@ -1,9 +1,39 @@
+[![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelop-.NET%20Desktop-CI)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=10)
+[![Build status](https://ci.appveyor.com/api/projects/status/kcpqh2ivfmgi8b51/branch/monodevelopwin?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/monodevelopwin)
+___
+
+# MonoDevelop for Windows
+
+This is a build fork of the original [***MonoDevelop***](https://github.com/mono/monodevelop) project to provide an installation package for Windows.
+This is currently based on the tag: monodevelop-7.6.9.22.
+Some changes have been made to resolve library dependencies and the project to build the setup program is completely new. Also there is now a powershell script
+which installs the prerequisites for the build.
+
+## Install
+
+Installer load from [here](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/MonoDevelop-7.6.9.22-x86-Debug.msi)
+
+## Compiling
+
+* install Visual Studio 2017
+* clone this fork ( git clone https://github.com/Cataurus/MonoDevelopWin.git)
+* open a powershell-terminal and execute the powershell-scriptfile *install.ps1* from the directory *scripts/windows*.
+This will install all prerequisite programs and do some fixes to compile Monodevelop
+to build.
+* then change in this terminal, to the directory *main* and run 'winbuild.bat'
+* wait for completed build
+* you can then start the IDE *via winrun.bat*
+
+***I wish a lot of fun***
+
+### orginal readme
+___
 **MonoDevelop** is a full-featured integrated development environment (IDE) for mono using Gtk#.
 
-The MonoDevelop core is also the foundation for Visual Studio for Mac.
+The MonoDevelop core is also the foundation for Visual Studio for Mac.  
 Feel free to file bugs against Visual Studio for Mac here as well.
 
-See http://www.monodevelop.com for more info.
+See http://www.monodevelop.com for more info.  
 
 [![Build Status](http://jenkins.mono-project.com/job/test-monodevelop-mainline/badge/icon)](http://jenkins.mono-project.com/job/test-monodevelop-mainline/)
 
@@ -15,9 +45,9 @@ Directory organization
 There are two main directories:
 
  * `main`: The core MonoDevelop assemblies and add-ins (all in a single
-    tarball/package).
+	tarball/package).
  * `extras`: Additional add-ins (each add-in has its own
-    tarball/package).
+	tarball/package).
 
 Compiling
 ---------
@@ -46,8 +76,8 @@ There are two variables you can set when running `configure`:
   * `core`: builds the MonoDevelop core only.
   * `all`: builds everything
   * `mac`: builds for Mac OS X
-
-**PS:** You can also create your own profile by adding a file to the profiles directory containing a list of the directories to build.
+  * You can also create your own profile by adding a file to the profiles
+directory containing a list of the directories to build.
 
 Disclaimer: Please be aware that the 'extras/JavaBinding' and 'extras/ValaBinding' packages do not currently work. When prompted or by manually selecting them during the './configure --select' step, make sure they stay deselected. (deselected by default)
 
@@ -97,15 +127,12 @@ Special Environment Variables
 	If this environment variable exists we assume we are compiling inside wrench.
 	We use this to enable raygun only for 'release' builds and not for normal
 	developer builds compiled on a dev machine with 'make && make run'.
-
+	
 
 Known Problems
 -----------------------------
 
-```
 "The type `GLib.IIcon' is defined in an assembly that is not referenced"
-```
-
 This happens when you accidentally installed gtk-sharp3 instead of the 2.12.x branch version.
 Make sure to 'make uninstall' or otherwise remove the gtk-sharp3 version and install the older one.
 
@@ -117,11 +144,23 @@ like the gtk-sharp3 as described before. You can delete the cache in $HOME/.conf
 References
 ----------
 
-**[MonoDevelop website](http://www.monodevelop.com)**
+**MonoDevelop website**
 
-**[Gnome Human Interface Guidelines (HIG)](https://developer.gnome.org/hig/stable/)**
+http://www.monodevelop.com
 
-**[freedesktop.org standards](http://freedesktop.org/Standards/)**
+**Gnome Human Interface Guidelines (HIG)**
+
+https://developer.gnome.org/hig/stable/
+
+**freedesktop.org standards**
+
+http://freedesktop.org/Standards/
+
+**Bugzilla**
+
+http://bugzilla.mozilla.org/bugwritinghelp.html
+
+http://bugzilla.mozilla.org/page.cgi?id=etiquette.html
 
 Discussion, Bugs, Patches
 -------------------------

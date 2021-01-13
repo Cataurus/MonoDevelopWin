@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.VisualStudio.Language</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind">
+            <summary>
+            Represents the kind of code elements in a document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Unspecified">
+            <summary>
+            Unspecified kind.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Invalid">
+            <summary>
+            Invalid kind.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Container">
+            <summary>
+            Kind is a type container.
+            </summary>
+            <remarks>
+            A type container can be any of <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.File"/>, <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Module"/>, <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Package"/>, or <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Namespace"/>.
+            Code should use one of the concrete values if needed.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.File">
+            <summary>
+            Kind is a file.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Module">
+            <summary>
+            Kind is a module.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Package">
+            <summary>
+            Kind is a package.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Namespace">
+            <summary>
+            Kind is a namespace.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Type">
+            <summary>
+            Kind is a type (<see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Class"/>, <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Interface"/>, <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Struct"/>, or <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Enum"/>).
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Class">
+            <summary>
+            Kind is a class.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Interface">
+            <summary>
+            Kind is an interface.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Struct">
+            <summary>
+            Kind is a struct.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Enum">
+            <summary>
+            Kind is an enum.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Member">
+            <summary>
+            Kind is a type member.
+            </summary>
+            <remarks>
+            A <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Member"/> kind can be any of
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Method"/>
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Property"/>
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Event"/>
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Field"/>
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Constructor"/>
+            <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Function"/>
+            </remarks>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Method">
+            <summary>
+            Kind is a method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Property">
+            <summary>
+            Kind is a property.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Event">
+            <summary>
+            Kind is an event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Field">
+            <summary>
+            Kind is a field.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Constructor">
+            <summary>
+            Kind is a constructor.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind.Function">
+            <summary>
+            Kind is a function.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker">
+            <summary>
+            Controls invocation and dismissal of Quick Info tooltips for <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> instances.
+            </summary>
+            <remarks>
+            This type can be called from any thread and will marshal its work to the UI thread as required.
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.IsQuickInfoActive(Microsoft.VisualStudio.Text.Editor.ITextView)" -->
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,System.Threading.CancellationToken)">
+            <summary>
+            Triggers Quick Info tooltip in the specified <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> at the caret or optional <paramref name="triggerPoint"/>.
+            </summary>
+            <exception cref="T:System.OperationCanceledException">
+            <paramref name="cancellationToken"/> was canceled by the caller or the operation was interrupted by another call to
+            <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,System.Threading.CancellationToken)"/>
+            </exception>
+            <param name="cancellationToken">If canceled before the method returns, cancels any computations in progress.</param>
+            <param name="textView">
+            The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView" /> for which Quick Info is to be triggered.
+            </param>
+            <param name="triggerPoint">
+            The <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint" /> in the view's text buffer at which Quick Info should be triggered.
+            </param>
+            <param name="options">Options for customizing Quick Info behavior.</param>
+            <returns>
+            An <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> tracking the state of the session or null if there are no items.
+            </returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.GetSession(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Gets the current <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> for the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Quick info is considered to be active if there is a visible, calculating, or recalculating quick info session.
+            </remarks>
+            <param name="textView">The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView" /> for which to lookup the session.</param>
+            <returns>The session, or <c>null</c> if there is no active session.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession">
+            <summary>
+            Tracks state of a visible or calculating Quick Info session.
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.StateChanged">
+            <summary>
+            Dispatched on the UI thread whenever the Quick Info Session changes state.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.ApplicableToSpan">
+            <summary>
+            The span of text to which this Quick Info session applies.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.Content">
+            <summary>
+            The ordered, merged collection of content to be displayed in the Quick Info.
+            </summary>
+            <remarks>
+            This field is originally null and is updated with the content once the session has
+            finished querying the providers.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.HasInteractiveContent">
+            <summary>
+            Indicates that this Quick Info has interactive content that can request to stay open.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.Options">
+            <summary>
+            Specifies attributes of the Quick Info session and Quick Info session presentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.State">
+            <summary>
+            The current state of the Quick Info session.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.TextView">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> for which this Quick Info session was created.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.GetTriggerPoint(Microsoft.VisualStudio.Text.ITextBuffer)">
+            <summary>
+            Gets the point at which the Quick Info tip was triggered in the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Returned <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint"/> is on the buffer requested by the caller.
+            </remarks>
+            <param name="textBuffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> relative to which to obtain the point.</param>
+            <returns>A <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint"/> indicating the point over which Quick Info was invoked.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.GetTriggerPoint(Microsoft.VisualStudio.Text.ITextSnapshot)">
+            <summary>
+            Gets the point at which the Quick Info tip was triggered in the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Returned point is on the buffer requested by the caller.
+            </remarks>
+            <param name="snapshot">The <see cref="T:Microsoft.VisualStudio.Text.ITextSnapshot"/> relative to which to obtain the point.</param>
+            <returns>The point over which Quick Info was invoked or <c>null</c> if it does not exist in <paramref name="snapshot"/>.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.DismissAsync">
+            <summary>
+            Dismisses the Quick Info session, if applicable. If the session is already dismissed,
+            this method no-ops.
+            </summary>
+            <returns>A task tracking the completion of the operation.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource">
+            <summary>
+            Source of Quick Info tooltip content item, proffered to the IDE by a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider"/>.
+            </summary>
+            <remarks>
+            This class is always constructed and disposed on the UI thread and called on
+            a non-UI thread. Callers that require the UI thread must explicitly marshal there with
+            <see cref="M:Microsoft.VisualStudio.Threading.JoinableTaskFactory.SwitchToMainThreadAsync(System.Threading.CancellationToken)"/>.
+            Content objects are resolved into UI constructs via the <see cref="T:Microsoft.VisualStudio.Text.Adornments.IViewElementFactoryService"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource.GetQuickInfoItemAsync(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Threading.CancellationToken)">
+            <summary>
+            Gets Quick Info item and tracking span via a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem"/>.
+            </summary>
+            <remarks>
+            This method is always called on a background thread. Multiple elements can be
+            be returned by a single source by wrapping them in a <see cref="T:Microsoft.VisualStudio.Text.Adornments.ContainerElement"/>.
+            </remarks>
+            <param name="session">An object tracking the current state of the Quick Info.</param>
+            <param name="cancellationToken">Cancels an in-progress computation.</param>
+            <returns>item and a tracking span for which these item are applicable.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider">
+            <summary>
+            A MEF component part that is proffered to the IDE to construct an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/>.
+            </summary>
+            <remarks>
+            This class is always constructed and called on the UI thread.
+            </remarks>
+            <example>
+            [Export(typeof(IAsyncQuickInfoSourceProvider))]
+            [Name("Foo QuickInfo Provider")]
+            [Order(After = "default")]
+            [ContentType("text")]
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider.TryCreateQuickInfoSource(Microsoft.VisualStudio.Text.ITextBuffer)">
+            <summary>
+            Creates an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> for the specified <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/>.
+            </summary>
+            <param name="textBuffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> for which this source produces items.</param>
+            <returns>
+            An instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> for <paramref name="textBuffer"/>
+            or null if no source could be created.
+            </returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent">
+            <summary>
+            Represents an interactive Quick Info content. This interface can be used to add an interactive content such as hyperlinks to
+            the Quick Info popup.
+            If any object implementing this interface is provided to
+            <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> via <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource.GetQuickInfoItemAsync(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Threading.CancellationToken)"/>,
+            the Quick Info presenter will allow to interact with this content, particulartly it will keep Quick Info popup open when mouse 
+            is over it and will allow this content to recieve mouse events.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent.KeepQuickInfoOpen">
+            <summary>
+            Gets whether the interactive Quick Info content wants to keep current Quick Info session open. Until this property is true, 
+            the <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> containing this content won't be dismissed even if mouse is moved somewhere else.
+            This is useful in very rare scenarios when an interactive Quick Info content handles all input interaction, while needs to 
+            keep this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> open (the only known example so far is LightBulb in its expanded state hosted in 
+            Quick Info).
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent.IsMouseOverAggregated">
+            <summary>
+            Gets a value indicating whether the mouse pointer is located over this interactive Quick Info content, 
+            including any parts that are out of the Quick Info visual tree (such as popups).
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem">
+            <summary>
+            The result generated by an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.#ctor(Microsoft.VisualStudio.Text.ITrackingSpan,System.Object)">
+            <summary>
+            Constructs a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem"/>.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown if item is null.</exception>
+            <param name="applicableToSpan">The span to which <paramref name="item"/> is applicable.</param>
+            <param name="item">The Quick Info item.</param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.ApplicableToSpan">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Text.ITrackingSpan"/> to which <see cref="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.Item"/> is applicable.
+            </summary>
+            <remarks>
+            This parameter can be null.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.Item">
+            <summary>
+            The item to be displayed in the Quick Info <see cref="T:Microsoft.VisualStudio.Text.Adornments.IToolTipPresenter"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions">
+            <summary>
+            Options for customization of Quick Info behavior.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions.None">
+            <summary>
+            No options.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions.TrackMouse">
+            <summary>
+            Dismisses Quick Info when the mouse moves away.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState">
+            <summary>
+            Defines the possible <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> states.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Created">
+            <summary>
+            Session has been created but is not yet active.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Calculating">
+            <summary>
+            Session is currently computing Quick Info content.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Dismissed">
+            <summary>
+            Session has been dismissed and is no longer active.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Visible">
+            <summary>
+            Computation is complete and session is visible.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs">
+            <summary>
+            Arguments for the <see cref="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.StateChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.#ctor(Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState)">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs"/>.
+            </summary>
+            <param name="oldState">The state before the transition.</param>
+            <param name="newState">The state after the transition.</param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.OldState">
+            <summary>
+            The state before the transition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.NewState">
+            <summary>
+            The state after the transition.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor">
+            <summary>
+            Represents an object describing a code element at the location where an <see cref="T:Microsoft.VisualStudio.Language.CodeLens.ICodeLensTag"/> will be created.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor.FilePath">
+            <summary>
+            The absolute file path of the document in which the descriptor is created.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor.ProjectGuid">
+            <summary>
+            The containing project of the document. Can be <see cref="F:System.Guid.Empty"/>
+            if the document is a solution's miscellaneous file, or if it does not need to be specified.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor.ElementDescription">
+            <summary>
+            A short description of the element for which this descriptor is created.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor.ApplicableSpan">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Text.Span"/> of the element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensDescriptor.Kind">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CodeElementKind"/> of the element.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.CodeLens.ICodeLensTag">
+            <summary>
+            An <see cref="T:Microsoft.VisualStudio.Text.Tagging.ITag"/> indicating the place where CodeLens indicators should be created.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.CodeLens.ICodeLensTag.Descriptor">
+            <summary>
+            The descriptor for this tag.
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.CodeLens.ICodeLensTag.Disconnected">
+            <summary>
+            Raised when this tag has been disconnected and is no longer used as part of the editor. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoBrokerSupport">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoBrokerSupport.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,Microsoft.VisualStudio.Utilities.PropertyCollection,System.Threading.CancellationToken)">
+            <summary>
+            This method supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.LegacyQuickInfoMetadata">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+            <remarks>
+            This is a MEF metadata view, similar to IContentTypeMetadata, however it uses
+            an explicit metadata class to allow it to be internal. Internal MEF metadata
+            view interfaces are supported but are currently suffering from intermittent
+            type load exceptions resulting from a bug in either the CLR or VS MEF.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSource">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSource.AugmentQuickInfoSession(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Collections.Generic.IList{System.Object},Microsoft.VisualStudio.Text.ITrackingSpan@)">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSourcesSupport">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSourcesSupport.LegacySources">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+    </members>
+</doc>

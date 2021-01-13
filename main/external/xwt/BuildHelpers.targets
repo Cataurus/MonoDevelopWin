@@ -1,0 +1,3 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!-- This file contains all the build helpers we require to build our projects in different contexts -->
+</Project>

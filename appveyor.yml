@@ -1,0 +1,29 @@
+version: 7.6.9.22-{build}
+branches:
+  only:
+  - monodevelopwin
+pull_requests:
+  do_not_increment_build_number: true
+image: Visual Studio 2017
+clone_folder: C:\mdw
+assembly_info:
+  patch: true
+  file: 'main\src\core\MonoDevelop.Startup\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  PATH: ${ProgramFiles(x86)}\Mono\bin;${ProgramFiles(x86)}\GtkSharp\2.12\bin;${PATH}
+  GTK_BASEPATH: ${ProgramFiles(x86)}\GtkSharp\2.1.12\
+install:
+- ps: ./scripts\windows\install.ps1
+build_script:
+- cmd: >-
+    cd main
+
+    winbuild.bat
+
+    cd ..
+artifacts:
+- path: setup\MonoDevelop\bin\Debug\*.msi
+test: off

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.CSharp.EditorFeatures</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler">
+            <summary>
+            csharp automatic line ender command handler
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler.WrapInType(System.String)">
+            <summary>
+            wrap field in type
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler.CheckLocation(Microsoft.CodeAnalysis.Text.SourceText,System.Int32,Microsoft.CodeAnalysis.SyntaxNode,Microsoft.CodeAnalysis.SyntaxToken)">
+            <summary>
+            make sure current location is okay to put semicolon
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler.TryGetLastToken(Microsoft.CodeAnalysis.Text.SourceText,System.Int32,Microsoft.CodeAnalysis.SyntaxNode,Microsoft.CodeAnalysis.SyntaxToken@)">
+            <summary>
+            get last token of the given using/field/statement/expression bodied member if one exists
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler.LocatedAtTheEndOfLine(Microsoft.CodeAnalysis.Text.TextLine,Microsoft.CodeAnalysis.SyntaxToken)">
+            <summary>
+            check whether the line is located at the end of the line
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion.AutomaticLineEnderCommandHandler.GetOwningNodes(Microsoft.CodeAnalysis.SyntaxNode,System.Int32)">
+            <summary>
+            find owning usings/field/statement/expression-bodied member of the given position
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editor.CSharp.ContentType.ContentTypeDefinitions.CSharpContentTypeDefinition">
+            <summary>
+            Definition of the primary C# content type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources.Press_TAB_to_insert">
+            <summary>
+              Looks up a localized string similar to      (Press TAB to insert).
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources.Smart_Indenting">
+            <summary>
+              Looks up a localized string similar to Smart Indenting.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Editor.CSharp.CSharpEditorResources.Split_string">
+            <summary>
+              Looks up a localized string similar to Split string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighlighters.LoopHighlighter.HighlightRelatedKeywords(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan},System.Boolean,System.Boolean)">
+            <summary>
+            Finds all breaks and continues that are a child of this node, and adds the appropriate spans to the spans list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighlighters.ReturnStatementHighlighter.HighlightRelatedKeywords(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan})">
+            <summary>
+            Finds all returns that are children of this node, and adds the appropriate spans to the spans list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighlighters.SwitchStatementHighlighter.HighlightRelatedKeywords(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan},System.Boolean,System.Boolean)">
+            <summary>
+            Finds all breaks and continues that are a child of this node, and adds the appropriate spans to the spans
+            list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighlighters.YieldStatementHighlighter.HighlightRelatedKeywords(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan})">
+            <summary>
+            Finds all returns that are children of this node, and adds the appropriate spans to the spans list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator.CSharpLineSeparatorService.GetLineSeparatorsAsync(Microsoft.CodeAnalysis.Document,Microsoft.CodeAnalysis.Text.TextSpan,System.Threading.CancellationToken)">
+            <summary>
+            Given a tree returns line separator spans.
+            The operation may take fairly long time on a big tree so it is cancellable.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator.CSharpLineSeparatorService.IsSeparableBlock(Microsoft.CodeAnalysis.SyntaxNode)">
+            <summary>Node types that are interesting for line separation.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator.CSharpLineSeparatorService.IsSeparableContainer(Microsoft.CodeAnalysis.SyntaxNode)">
+            <summary>Node types that may contain separable blocks.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.LineSeparator.CSharpLineSeparatorService.ProcessNodeList``1(Microsoft.CodeAnalysis.SyntaxList{``0},System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan},System.Threading.CancellationToken)">
+            <summary>
+            If node is separable and not the last in its container => add line separator after the node
+            If node is separable and not the first in its container => ensure separator before the node
+            last separable node in Program needs separator after it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editor.CSharp.NavigationBar.CSharpNavigationBarItemService.AddFieldSpan(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.SyntaxTree,System.Collections.Generic.List{Microsoft.CodeAnalysis.Text.TextSpan})">
+            <summary>
+            Computes a span for a given field symbol, expanding to the outer 
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1284 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.VisualStudio.Language</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CommitBehavior">
+            <summary>
+            Instructs the editor how to behave after invoking the custom commit method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CommitBehavior.None">
+            <summary>
+            Use the default behavior
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CommitBehavior.SuppressFurtherCommandHandlers">
+            <summary>
+            Surpresses further invocation of the TypeChar command handlers.
+            By default, editor invoke these command handlers to enable features such as brace completion.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CommitBehavior.RaiseFurtherCommandHandlers">
+            <summary>
+            Raises further invocation of the ReturnKey and Tab command handlers.
+            By default, editor doesn't invoke ReturnKey and Tab command handlers after committing completion session.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionClosedEventArgs">
+            <summary>
+            This class is used to notify completion's logic when the UI closes
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionClosedEventArgs.#ctor(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Constructs instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionClosedEventArgs"/>.
+            </summary>
+            <param name="textView"><see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> that hosted this completion UI</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionContext">
+            <summary>
+            This type is used to transfer data from <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>
+            to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker"/> and further to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.Items">
+            <summary>
+            Set of completion items available at a location
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.UseSoftSelection">
+            <summary>
+            When set to true, the completion list will be initially soft-selected.
+            Soft selection means that typing commit characters will not commit the item.
+            The item may be committed only by using TAB or double-clicking.
+            Soft selection is represented by a border around the item, without a background fill.
+            Selecting another item automatically disables soft selection and enables full selection.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.UseSuggestionMode">
+            <summary>
+            When set to true, the completion list will be in the "builder" mode,
+            such that hitting Space will not commit it, but append it to the constructed item.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.SuggestionModeDescription">
+            <summary>
+            Displayed when UI is in suggestion mode, yet there is no code to suggest
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem})">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionContext"/> with <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/> applicable to a <see cref="T:Microsoft.VisualStudio.Text.SnapshotSpan"/>
+            </summary>
+            <param name="items">Available completion items</param>
+            <param name="applicableSpan">Completion list will be filtered by contents of this span</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionContext.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem},System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionContext"/> with <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/> applicable to a <see cref="T:Microsoft.VisualStudio.Text.SnapshotSpan"/>,
+            <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/> available for these items and instructions on suggestion mode and soft selection.
+            </summary>
+            <param name="items">Available completion items</param>
+            <param name="applicableToSpan">Completion list will be filtered by contents of this span</param>
+            <param name="availableFilters">Completion filters available for these completion items</param>
+            <param name="useSoftSelection">Whether UI should use soft selection</param>
+            <param name="useSuggestionMode">Whether UI should enter suggestion mode</param>
+            <param name="suggestionModeDescription">Explains why suggestion mode is active. It is displayed when applicableSpan is empty. Otherwise, UI displays content of applicableSpan. May be null.</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter">
+            <summary>
+            Identifies a filter that toggles exclusive display of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s that reference it.
+            </summary>
+            <remarks>
+            These instances should be singletons. All <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s that should be filtered
+            using the same filter button must use the same reference to the instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/>.
+            </remarks>
+            <example>
+            static CompletionFilter MyFilter = new CompletionFilter("My items", "m", MyItemsImageMoniker);
+            </example>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter.DisplayText">
+            <summary>
+            Name of this filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter.AccessKey">
+            <summary>
+            Key used in a keyboard shortcut that toggles this filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter.Image">
+            <summary>
+            <see cref="T:Microsoft.VisualStudio.Core.Imaging.AccessibleImageId"/> that represents this filter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter.#ctor(System.String,System.String,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId)">
+            <summary>
+            Constructs an instance of CompletionFilter.
+            </summary>
+            <param name="displayText">Name of this filter</param>
+            <param name="accessKey">Key used in a keyboard shortcut that toggles this filter.</param>
+            <param name="image">ImageId that represents this filter</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterChangedEventArgs">
+            <summary>
+            This class is used to notify completion's logic of selection change in the filter UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterChangedEventArgs.Filters">
+            <summary>
+            Current state of the filters
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterChangedEventArgs.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState})">
+            <summary>
+            Constructs instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterChangedEventArgs"/>.
+            </summary>
+            <param name="filters">Current state of the filters</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason">
+            <summary>
+            Describes the kind of action that triggered completion to filter.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason.Initial">
+            <summary>
+            Completion was triggered by a direct invocation of the completion feature
+            using the Edit.ListMember command.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason.Insertion">
+            <summary>
+            Completion was triggered via an action inserting a character into the document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason.Deletion">
+            <summary>
+            Completion was triggered via an action deleting a character from the document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason.FilterChange">
+            <summary>
+            Update was triggered by changing filters
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState">
+            <summary>
+            Immutable data transfer object used to communicate between the completion session and completion UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.Filter">
+            <summary>
+            Reference to the completion filter
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsAvailable">
+            <summary>
+            Whether the filter is available.
+            Filter should be available when there are visible <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s that define this <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.Filter"/> in their <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Filters"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsSelected">
+            <summary>
+            Whether the filter is selected by the user.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionFilter,System.Boolean)">
+            <summary>
+            Constructs a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/>.
+            </summary>
+            <param name="filter">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/></param>
+            <param name="isAvailable">Whether this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/> is available</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionFilter,System.Boolean,System.Boolean)">
+            <summary>
+            Constructs a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/> when selected state is known.
+            </summary>
+            <param name="filter">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/></param>
+            <param name="isAvailable">Whether this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/> is available</param>
+            <param name="isSelected">Whether this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/> is selected</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.WithAvailability(System.Boolean)">
+            <summary>
+            Returns instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/> with specified <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsAvailable"/>
+            </summary>
+            <param name="isAvailable">Value to use for <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsAvailable"/></param>
+            <returns>Updated instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.WithSelected(System.Boolean)">
+            <summary>
+            Returns instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/> with specified <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsSelected"/>
+            </summary>
+            <param name="availability">Value to use for <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState.IsSelected"/></param>
+            <returns>Updated instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem">
+            <summary>
+            This class, returned from <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>, represents a single entry
+            to be displayed in the completion UI. This class implements <see cref="T:Microsoft.VisualStudio.Utilities.IPropertyOwner"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText">
+            <summary>
+            Text used in the UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText">
+            <summary>
+            Text inserted when completing this item
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText">
+            <summary>
+            Text used by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> when sorting against other items
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText">
+            <summary>
+            Text used by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> when matching against the applicable span
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Source">
+            <summary>
+            Reference to the instance that will provide tooltip and custom commit method.
+            Usually it is the same instance as the one that created this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Filters">
+            <summary>
+            <see cref="T:System.Collections.Immutable.ImmutableArray"/> of references to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/>s applicable to this item
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.UseCustomCommit">
+            <summary>
+            Whether or not to invoke item's <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Source"/>'s custom commit method when completing this item
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Image">
+            <summary>
+            Image displayed in the UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Suffix">
+            <summary>
+            Additional text to display in the UI, after <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>.
+            This text has less emphasis than <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/> and is usually right-aligned.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.AttributeIcons">
+            <summary>
+            Additional images to display in the UI.
+            Usually, these images are displayed on the far right side of the UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Properties">
+            <summary>
+            The collection of properties controlled by the property owner. See <see cref="P:Microsoft.VisualStudio.Utilities.IPropertyOwner.Properties"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource)">
+            <summary>
+            Creates a completion item whose <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText"/> and <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText"/> are all the same,
+            and there are no image, filter, suffix, attribute images nor custom commit behavior associated with this item.
+            </summary>
+            <param name="displayText">Text to use in the UI, when sorting, filtering and completing</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId)">
+            <summary>
+            Creates a completion item whose <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText"/> and <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText"/> are all the same,
+            there is an image, and there are no filter, suffix, attribute images, suffix nor custom commit behavior associated with this item.
+            </summary>
+            <param name="displayText">Text to use in the UI, when sorting, filtering and completing</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+            <param name="image">Image displayed in the UI</param>
+            <param name="suffix">Additional text to display in the UI</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilter})">
+            <summary>
+            Creates a completion item whose <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText"/> and <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText"/> are all the same,
+            there is an image, filters, and there are no suffix, attribute images nor custom commit behavior associated with this item.
+            </summary>
+            <param name="displayText">Text to use in the UI, when sorting, filtering and completing</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+            <param name="image">Image displayed in the UI</param>
+            <param name="suffix">Additional text to display in the UI</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilter},System.String)">
+            <summary>
+            Creates a completion item whose <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText"/> and <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText"/> are all the same,
+            there is an image, filters, suffix, and there are no custom commit behavior nor attribute images associated with this item.
+            </summary>
+            <param name="displayText">Text to use in the UI, when sorting, filtering and completing</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+            <param name="image">Image displayed in the UI</param>
+            <param name="suffix">Additional text to display in the UI</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilter},System.String,System.Boolean)">
+            <summary>
+            Creates a completion item whose <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/>, <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.SortText"/> and <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.FilterText"/> are all the same,
+            there is an image, filters, suffix, custom commit behavior and there are no attribute images associated with this item.
+            </summary>
+            <param name="displayText">Text to use in the UI, when sorting, filtering and completing</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+            <param name="image">Image displayed in the UI</param>
+            <param name="suffix">Additional text to display in the UI</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.#ctor(System.String,Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource,Microsoft.VisualStudio.Core.Imaging.AccessibleImageId,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilter},System.String,System.Boolean,System.String,System.String,System.String,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Core.Imaging.AccessibleImageId})">
+            <summary>
+            Creates a completion item, allowing customization of all of its properties.
+            </summary>
+            <param name="displayText">Text used in the UI</param>
+            <param name="insertText">Text inserted when completing this item</param>
+            <param name="sortText">Text used by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> when sorting against other items</param>
+            <param name="filterText">Text used by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> when matching against the applicable span</param>
+            <param name="source">Reference to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> that created this item</param>
+            <param name="filters"><see cref="T:System.Collections.Immutable.ImmutableArray"/> of references to <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilter"/>s applicable to this item</param>
+            <param name="useCustomCommit">Whether or not to invoke item's <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.Source"/>'s custom commit method when completing this item</param>
+            <param name="image">Image displayed in the UI</param>
+            <param name="suffix">Additional text to display in the UI</param>
+            <param name="attributeImages">Additional images to display in the UI</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemEventArgs">
+            <summary>
+            This class is used to notify of an operation that affects a single <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemEventArgs.Item">
+            <summary>
+            Relevant item
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItemEventArgs.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionItem)">
+            <summary>
+            Constructs instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemEventArgs"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelectedEventArgs">
+            <summary>
+            This class is used to notify completion's logic of selecting through the UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelectedEventArgs.SelectedItem">
+            <summary>
+            Selected item. Might be null if there is no selection
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelectedEventArgs.SuggestionModeSelected">
+            <summary>
+            Whether selected item is a suggestion mode item
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelectedEventArgs.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionItem,System.Boolean)">
+            <summary>
+            Constructs instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelectedEventArgs"/>.
+            </summary>
+            <param name="selectedItem">User-selected item</param>
+            <param name="suggestionModeSelected">Whether the selected item is a suggestion mode item</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelection" -->
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelection.NoChange">
+            <summary>
+            Don't change the current selection mode.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelection.SoftSelected">
+            <summary>
+            Set selection mode to soft selection: item is committed only using Tab or mouse.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelection.Selected">
+            <summary>
+            Set selection mode to regular selection: item is committed using Tab, mouse, enter and commit characters.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemsWithHighlightEventArgs">
+            <summary>
+            This class is used to notify of an operation that affects multiple <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight"/>s.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemsWithHighlightEventArgs.Items">
+            <summary>
+            Relevant items
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItemsWithHighlightEventArgs.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight})">
+            <summary>
+            Constructs instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemEventArgs"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight">
+            <summary>
+            Wraps <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.CompletionItem"/> with information about highlighted parts of its <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.CompletionItem">
+            <summary>
+            The completion item
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.HighlightedSpans">
+            <summary>
+            Which parts of <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/> to highlight
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionItem)">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight"/> without any highlighting.
+            Used when the <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.CompletionItem"/> appears in the completion list without being a text match.
+            </summary>
+            <param name="completionItem">Instance of the <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.CompletionItem"/></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionItem,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Text.Span})">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight"/> with given highlighting.
+            Used when text used to filter the completion list can be found in the <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/>.
+            </summary>
+            <param name="completionItem">Instance of the <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight.CompletionItem"/></param>
+            <param name="highlightedSpans"><see cref="T:Microsoft.VisualStudio.Text.Span"/>s of <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.DisplayText"/> to highlight</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel">
+            <summary>
+            This class contains completion items, filters and other pieces of information
+            used by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter"/> to render the completion UI.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.Items">
+            <summary>
+            Completion items to display with their highlighted spans.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.Filters">
+            <summary>
+            Completion filters with their available and selected state.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.ApplicableSpan">
+            <summary>
+            Span pertinent to the completion session.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.UseSoftSelection">
+            <summary>
+            Controls whether selected item should be soft selected.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.UseSuggestionMode">
+            <summary>
+            Controls whether suggestion mode item is visible.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.SelectSuggestionMode">
+            <summary>
+            Controls whether suggestion mode item is selected.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.SelectedItemIndex">
+            <summary>
+            Controls which item is selected. Use -1 in suggestion mode.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.SuggestionModeItem">
+            <summary>
+            Suggestion mode item to display.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.SuggestionModeDescription">
+            <summary>
+            Text to display when <see cref="F:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.SuggestionModeItem"/>'s <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.InsertText"/> is empty.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight},System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState},Microsoft.VisualStudio.Text.ITrackingSpan,System.Boolean,System.Boolean,System.Boolean,System.Int32,Microsoft.VisualStudio.Language.Intellisense.CompletionItem,System.String)">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel"/>
+            </summary>
+            <param name="items">Completion items to display with their highlighted spans</param>
+            <param name="filters">Completion filters with their available and selected state</param>
+            <param name="applicableSpan">Span pertinent to the completion session</param>
+            <param name="useSoftSelection">Controls whether selected item should be soft selected</param>
+            <param name="useSuggestionMode">Controls whether suggestion mode item is visible</param>
+            <param name="selectSuggestionMode">Controls whether suggestion mode item is selected</param>
+            <param name="selectedItemIndex">Controls which item is selected. Use -1 in suggestion mode</param>
+            <param name="suggestionModeItem">Suggestion mode item to display</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger">
+            <summary>
+            What triggered the completion, but not where it happened.
+            The reason we don't expose location is that for each extension,
+            we map the point to a buffer with matching content type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger.Reason">
+            <summary>
+            The reason that completion was started.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger.Character">
+            <summary>
+            The text edit associated with the triggering action.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason,System.Char)">
+            <summary>
+            Creates a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger"/> associated with a text edit
+            </summary>
+            <param name="reason">The kind of action that triggered completion to start</param>
+            <param name="character">Character that triggered completion</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger.#ctor(Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason)">
+            <summary>
+            Creates a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger"/> not associated with a text edit
+            </summary>
+            <param name="reason">The kind of action that triggered completion to start</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason">
+            <summary>
+            Describes the kind of action that initially triggered completion to open.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason.Invoke">
+            <summary>
+            Completion was triggered by a direct invocation of the completion feature
+            using the Edit.ListMember command.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason.InvokeAndCommitIfUnique">
+            <summary>
+            Completion was triggered with a request to commit if a single item would be selected
+            using the Edit.CompleteWord command.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason.Insertion">
+            <summary>
+            Completion was triggered via an action inserting a character into the document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason.Deletion">
+            <summary>
+            Completion was triggered via an action deleting a character from the document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason.Snippets">
+            <summary>
+            Completion was triggered for snippets only.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel">
+            <summary>
+            This class, returned from <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/>,
+            contains completion items to display in the UI, recommended item to display, selection mode and available filters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.Items">
+            <summary>
+            Items to display in the completion UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.SelectedItemIndex">
+            <summary>
+            Recommended item index to select. Presence of a suggestion mode item may override
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.Filters">
+            <summary>
+            Completion filters with their availability and selection state.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.SelectionMode">
+            <summary>
+            Controls the selection mode of the selected item.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.CenterSelection">
+            <summary>
+            Whether selected item should be displayed in the center of the list. Usually, this is true
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.UniqueItem">
+            <summary>
+            Optionally, provides an item that should be committed using the "commit if unique" command.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight},System.Int32)">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel"/> without completion filters.
+            </summary>
+            <param name="items">Items to display in the completion UI.</param>
+            <param name="selectedItemIndex">Recommended item index to select.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight},System.Int32,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState})">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel"/> with completion filters.
+            </summary>
+            <param name="items">Items to display in the completion UI.</param>
+            <param name="selectedItemIndex">Recommended item index to select.</param>
+            <param name="filters">Completion filters with their availability and selection state.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel.#ctor(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItemWithHighlight},System.Int32,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState},Microsoft.VisualStudio.Language.Intellisense.CompletionItemSelection,System.Boolean,Microsoft.VisualStudio.Language.Intellisense.CompletionItem)">
+            <summary>
+            Constructs <see cref="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel"/> with completion filters, indication regarding selection mode and the unique item
+            </summary>
+            <param name="items">Items to display in the completion UI.</param>
+            <param name="selectedItemIndex">Recommended item index to select.</param>
+            <param name="filters">Completion filters with their availability and selection state.</param>
+            <param name="selectionMode">Allows <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> to influence the selection mode.</param>
+            <param name="uniqueItem">Provides <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/> to commit using "commit if unique" command despite displaying more than one item.</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker">
+            <summary>
+            Represents a class that manages the completion feature.
+            The editor uses this class to trigger completion and obtain instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession"/>
+            which contains methods and events relevant to the active completion session.
+            </summary>
+            <example>
+                [Import]
+                IAsyncCompletionBroker CompletionBroker { get; set; }
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker.IsCompletionSupported(Microsoft.VisualStudio.Utilities.IContentType)">
+            <summary>
+            Returns whether there are any completion item sources available
+            for the top buffer in the provided view.
+            </summary>
+            <param name="textView">View to check for available completion source exports</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker.TriggerCompletion(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.SnapshotPoint,System.Char)">
+            <summary>
+            Activates completion and returns <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession"/>.
+            If completion was already active, returns the existing session without changing it.
+            </summary>
+            <param name="textView">View that hosts completion and relevant buffers</param>
+            <param name="triggerLocation">Location of completion on the view's top buffer. Used to pick relevant <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>s and <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/></param>
+            <param name="typeChar">Character that triggered completion, or default</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker.IsCompletionActive(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Returns whether completion is active in given view
+            </summary>
+            <param name="textView">View that hosts completion and relevant buffers</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker.GetSession(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Returns <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession"/> if active or null if not
+            </summary>
+            <param name="textView">View that hosts completion and relevant buffers</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource">
+            <summary>
+            Represents a class that provides <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s and other information
+            relevant to the completion feature at a specific <see cref="T:Microsoft.VisualStudio.Text.SnapshotPoint"/>.
+            </summary>
+            <remarks>
+            Instances of this class should be created by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSourceProvider"/>, which is a MEF part.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.GetCompletionContextAsync(Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger,Microsoft.VisualStudio.Text.SnapshotPoint,Microsoft.VisualStudio.Text.SnapshotSpan,System.Threading.CancellationToken)">
+            <summary>
+            Called once per completion session to fetch the set of all completion items available at a given location.
+            </summary>
+            <param name="trigger">What caused the completion</param>
+            <param name="triggerLocation">Location where completion was triggered, on the subject buffer that matches this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>'s content type</param>
+            <param name="applicableSpan">Location where completion will take place, on the view's top buffer</param>
+            <returns>A struct that holds completion items and applicable span</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.CustomCommit(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITextBuffer,Microsoft.VisualStudio.Language.Intellisense.CompletionItem,Microsoft.VisualStudio.Text.ITrackingSpan,System.Char,System.Threading.CancellationToken)">
+            <summary>
+            Custom commit callback for completion item created by this completion item source.
+            Called if <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.UseCustomCommit">CompletionItem.CustomCommit</see> is set.
+            </summary>
+            <param name="view">View that hosts completion and relevant buffers</param>
+            <param name="buffer">Reference to the buffer with matching content type to perform text edits etc.</param>
+            <param name="item">Which completion item is to be applied</param>
+            <param name="applicableSpan">Span augmented by completion</param>
+            <param name="edit">Text change associated with this commit</param>
+            <returns>Instruction for the editor how to proceed after invoking this method</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.GetDefaultCommitBehavior(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITextBuffer,Microsoft.VisualStudio.Language.Intellisense.CompletionItem,Microsoft.VisualStudio.Text.ITrackingSpan,System.Char,System.Threading.CancellationToken)">
+            <summary>
+            How the editor should behave after invoking default commit behavior on specified item.
+            Called if <see cref="P:Microsoft.VisualStudio.Language.Intellisense.CompletionItem.UseCustomCommit">CompletionItem.CustomCommit</see> is false.
+            </summary>
+            <param name="view">View that hosts completion and relevant buffers</param>
+            <param name="buffer">Reference to the buffer with matching content type to perform text edits etc.</param>
+            <param name="item">Which completion item is to be applied</param>
+            <param name="applicableSpan">Span augmented by completion</param>
+            <param name="edit">Text change associated with this commit</param>
+            <returns>Instruction for the editor how to proceed after editor commits the <paramref name="item"/></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.GetDescriptionAsync(Microsoft.VisualStudio.Language.Intellisense.CompletionItem,System.Threading.CancellationToken)">
+            <summary>
+            Returns tooltip associated with provided completion item
+            </summary>
+            <param name="item"></param>
+            <returns>Return type is pending what we agree to describe GUI in cross platform fashion</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.GetPotentialCommitCharacters">
+            <summary>
+            Returns characters that may commit completion.
+            When text edit matches one of these characters, <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.ShouldCommitCompletion(System.Char,Microsoft.VisualStudio.Text.SnapshotPoint)"/> is called.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.ShouldCommitCompletion(System.Char,Microsoft.VisualStudio.Text.SnapshotPoint)">
+            <summary>
+            Returns whether this character is a commit character in a given location.
+            </summary>
+            <param name="typeChar">Character typed by the user</param>
+            <param name="location">Location in the snapshot of the view's topmost buffer</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource.ShouldTriggerCompletion(System.Char,Microsoft.VisualStudio.Text.SnapshotPoint)">
+            <summary>
+            Return the span applicable to the prospective session or null,
+            given a trigger character and caret location.
+            </summary>
+            <param name="typeChar">Character typed by the user</param>
+            <param name="location">Location on the subject buffer that matches this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>'s content type</param>
+            <returns>Applicable span for the prospective completion session or null.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSourceProvider">
+            <summary>
+            Provides instances of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> which filters and sorts available <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s given the current state of the editor.
+            </summary>
+            <summary>
+            Provides instances of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> which provides <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s
+            and other information relevant to the completion feature at a specific <see cref="T:Microsoft.VisualStudio.Text.SnapshotPoint"/>
+            </summary>
+            <remarks>
+            This is a MEF component and should be exported with [ContentType] and [Name] attributes
+            and optional [TextViewRoles] attribute.
+            Completion feature will request data from all exported <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/>s whose ContentType
+            matches content type of any buffer in the completion's trigger location.
+            </remarks>
+            <example>
+                [Export(typeof(IAsyncCompletionItemSource))]
+                [Name(nameof(MyCompletionItemSource))]
+                [ContentType("text")]
+                [TextViewRoles(PredefinedTextViewRoles.Editable)]
+                public class MyCompletionItemSource : IAsyncCompletionItemSource
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSourceProvider.GetOrCreate(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Creates an instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/> for the specified <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <param name="textView">Text view that will host the completion. Completion acts on buffers of this view.</param>
+            <returns>Instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSource"/></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService">
+            <summary>
+            Represents a class that filters and sorts available <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s given the current state of the editor.
+            It also declares which completion filters are available for the returned subset of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s.
+            </summary>
+            <remarks>
+            Instances of this class should be created by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionItemSourceProvider"/>, which is a MEF part.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService.UpdateCompletionListAsync(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem},Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason,Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason,Microsoft.VisualStudio.Text.ITextSnapshot,Microsoft.VisualStudio.Text.ITrackingSpan,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState},Microsoft.VisualStudio.Text.Editor.ITextView,System.Threading.CancellationToken)">
+            <summary>
+            This method is first called before completion is about to appear,
+            and then on subsequent typing events and when user toggles completion filters.
+            user's input tracked with <see cref="T:Microsoft.VisualStudio.Text.ITrackingSpan"/> on given <see cref="T:Microsoft.VisualStudio.Text.ITextSnapshot"/>
+            and a collection of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState"/>s that indicate user's filter selection.
+            </summary>
+            <param name="sortedList">Set of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s to filter and sort, originally returned from <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService.SortCompletionListAsync(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem},Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason,Microsoft.VisualStudio.Text.ITextSnapshot,Microsoft.VisualStudio.Text.ITrackingSpan,Microsoft.VisualStudio.Text.Editor.ITextView,System.Threading.CancellationToken)"/></param>
+            <param name="triggerReason">The <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason"/> completion was initially triggered.</param>
+            <param name="filterReason">The <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason"/> completion is being updated.</param>
+            <param name="snapshot">Current text snapshot of the view's top buffer</param>
+            <param name="applicableToSpan">Span which tracks the location of the completion session and user's input</param>
+            <param name="selectedFilters">Filters, their availability and selection state</param>
+            <param name="view">Instance of <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> that hosts the completion</param>
+            <param name="token">Cancellation token that may interrupt this operation</param>
+            <returns>Instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel"/> that contains completion items to render, filters to display and recommended item to select</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService.SortCompletionListAsync(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem},Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason,Microsoft.VisualStudio.Text.ITextSnapshot,Microsoft.VisualStudio.Text.ITrackingSpan,Microsoft.VisualStudio.Text.Editor.ITextView,System.Threading.CancellationToken)">
+            <summary>
+            This method is first called before completion is about to appear,
+            and then on subsequent typing events and when user toggles completion filters.
+            The result of this method will be used in subsequent invocations of <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService.UpdateCompletionListAsync(System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionItem},Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason,Microsoft.VisualStudio.Language.Intellisense.CompletionFilterReason,Microsoft.VisualStudio.Text.ITextSnapshot,Microsoft.VisualStudio.Text.ITrackingSpan,System.Collections.Immutable.ImmutableArray{Microsoft.VisualStudio.Language.Intellisense.CompletionFilterWithState},Microsoft.VisualStudio.Text.Editor.ITextView,System.Threading.CancellationToken)"/>
+            User's input is tracked by <see cref="T:Microsoft.VisualStudio.Text.ITrackingSpan"/> on a <see cref="T:Microsoft.VisualStudio.Text.ITextSnapshot"/> in a <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <param name="initialList">Set of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s to filter and sort</param>
+            <param name="triggerReason">The <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionTriggerReason"/> completion was initially triggered.</param>
+            <param name="snapshot">Current text snapshot of the view's top buffer</param>
+            <param name="applicableToSpan">Span which tracks the location of the completion session and user's input</param>
+            <param name="view">Instance of <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> that hosts the completion</param>
+            <param name="token">Cancellation token that may interrupt this operation</param>
+            <returns>Instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.FilteredCompletionModel"/> that contains completion items to render, filters to display and recommended item to select</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionServiceProvider">
+            <summary>
+            Provides instances of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> which filters and sorts available <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>s given the current state of the editor.
+            </summary>
+            <remarks>
+            This is a MEF component and should be exported with [ContentType] and [Name] attributes
+            and optional [Order] and [TextViewRoles] attributes.
+            An instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> is selected
+            first by matching ContentType with content type of the view's top buffer, and then by Order.
+            Only one <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> is used in a given view.
+            </remarks>
+            <example>
+                [Export(typeof(IAsyncCompletionService))]
+                [Name(nameof(MyCompletionService))]
+                [ContentType("text")]
+                [TextViewRoles(PredefinedTextViewRoles.Editable)]
+                [Order(Before = "OtherCompletionService")]
+                public class MyCompletionServiceProvider : IAsyncCompletionServiceProvider
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionServiceProvider.GetOrCreate(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Creates an instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/> for the specified <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <param name="textView">Text view that will host the completion. Completion acts on buffers of this view.</param>
+            <returns>Instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionService"/></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession">
+            <summary>
+            Represents a class that tracks completion within a single <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            Constructed and managed by an instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionBroker"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.OpenOrUpdate(Microsoft.VisualStudio.Language.Intellisense.CompletionTrigger,Microsoft.VisualStudio.Text.SnapshotPoint)">
+            <summary>
+            Request completion to be opened or updated in a given location, completion items filtered and sorted, and the UI updated.
+            </summary>
+            <param name="view">View that hosts completion and relevant buffers</param>
+            <param name="trigger">What caused completion</param>
+            <param name="triggerLocation">Location of the trigger on the subject buffer</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.Dismiss">
+            <summary>
+            Stops the session and hides associated UI.
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.ShouldCommit(System.Char,Microsoft.VisualStudio.Text.SnapshotPoint)" -->
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.Commit(System.Threading.CancellationToken,System.Char)">
+            <summary>
+            Commits the currently selected <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/>.
+            Runs on UI thread.
+            </summary>
+            <param name="token">Token used to cancel this operation</param>
+            <param name="char">The text edit which caused this action. May be default(char).</param>
+            <returns>Instruction for the editor how to proceed after invoking this method</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.CommitIfUnique(System.Threading.CancellationToken)">
+            <summary>
+            Commits the single <see cref="T:Microsoft.VisualStudio.Language.Intellisense.CompletionItem"/> or opens the completion UI.
+            </summary>
+            <param name="token">Token used to cancel this operation</param>
+            <returns>Whether the unique item was committed.</returns>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.TextView">
+            <summary>
+            Returns the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> this session is active on.
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.ItemCommitted">
+            <summary>
+            Fired when completion item is committed
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.Dismissed">
+            <summary>
+            Fired when completion session is dismissed
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.GetVisibleItems(System.Threading.CancellationToken)">
+            <summary>
+            Gets items visible in the UI
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncCompletionSession.GetSelectedItem(System.Threading.CancellationToken)">
+            <summary>
+            Gets currently selected item
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter">
+            <summary>
+            Represents a class that manages user interface for the completion feature
+            </summary>
+            <remarks>
+            Instances of this class should be created by <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider"/>, which is a MEF part.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.Open(Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel)">
+            <summary>
+            Opens the UI and displays provided data
+            </summary>
+            <param name="presentation"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.Update(Microsoft.VisualStudio.Language.Intellisense.CompletionPresentationViewModel)">
+            <summary>
+            Displays provided data on the UI
+            </summary>
+            <param name="presentation"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.Close">
+            <summary>
+            Hides the completion UI
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.FiltersChanged">
+            <summary>
+            Notifies of user changing the selection state of filters
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.CompletionItemSelected">
+            <summary>
+            Notifies of user selecting an item
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.CommitRequested">
+            <summary>
+            Notifies of user committing an item for completion
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter.CompletionClosed">
+            <summary>
+            Notifies of UI closing
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider">
+            <summary>
+            Represents a class that produces instances of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter"/>
+            </summary>
+            <remarks>
+            This is a MEF component and should be exported with [ContentType] and [Name] attributes
+            and optional [Order] attribute.
+            An instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider"/> is selected
+            first by matching ContentType with content type of the view's top buffer, and then by Order.
+            Only one <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider"/> is used in a given view.
+            </remarks>
+            <example>
+                [Export(typeof(ICompletionUIFactory))]
+                [Name(nameof(MyCompletionUIFactory))]
+                [ContentType("any")]
+                [TextViewRoles(PredefinedTextViewRoles.Editable)]
+                [Order(Before = nameof(MyOtherCompletionUIFactory))]
+                public class MyCompletionUIFactory : ICompletionUIFactory
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider.GetOrCreate(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Returns instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter"/> that will host completion for given <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>
+            </summary>
+            <remarks>It is encouraged to reuse the UI over creating new UI each time this method is called.</remarks>
+            <param name="textView">Text view that will host the completion. Completion acts on buffers of this view.</param>
+            <returns>Instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter"/></returns>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenterProvider.ResultsPerPage">
+            <summary>
+            Declares size of the jump when user presses PageUp and PageDown keys.
+            </summary>
+            <remarks>This value is read by the controller that processes scrolling and selection.
+            The <see cref="T:Microsoft.VisualStudio.Language.Intellisense.ICompletionPresenter"/> is just a view that doesn't participate in keyboard scrolling.</remarks>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker">
+            <summary>
+            Controls invocation and dismissal of Quick Info tooltips for <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> instances.
+            </summary>
+            <remarks>
+            This type can be called from any thread and will marshal its work to the UI thread as required.
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.IsQuickInfoActive(Microsoft.VisualStudio.Text.Editor.ITextView)" -->
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,System.Threading.CancellationToken)">
+            <summary>
+            Triggers Quick Info tooltip in the specified <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> at the caret or optional <paramref name="triggerPoint"/>.
+            </summary>
+            <exception cref="T:System.OperationCanceledException">
+            <paramref name="cancellationToken"/> was canceled by the caller or the operation was interrupted by another call to
+            <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,System.Threading.CancellationToken)"/>
+            </exception>
+            <param name="cancellationToken">If canceled before the method returns, cancels any computations in progress.</param>
+            <param name="textView">
+            The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView" /> for which Quick Info is to be triggered.
+            </param>
+            <param name="triggerPoint">
+            The <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint" /> in the view's text buffer at which Quick Info should be triggered.
+            </param>
+            <param name="options">Options for customizing Quick Info behavior.</param>
+            <returns>
+            An <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> tracking the state of the session or null if there are no items.
+            </returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoBroker.GetSession(Microsoft.VisualStudio.Text.Editor.ITextView)">
+            <summary>
+            Gets the current <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> for the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Quick info is considered to be active if there is a visible, calculating, or recalculating quick info session.
+            </remarks>
+            <param name="textView">The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView" /> for which to lookup the session.</param>
+            <returns>The session, or <c>null</c> if there is no active session.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession">
+            <summary>
+            Tracks state of a visible or calculating Quick Info session.
+            </summary>
+        </member>
+        <member name="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.StateChanged">
+            <summary>
+            Dispatched on the UI thread whenever the Quick Info Session changes state.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.ApplicableToSpan">
+            <summary>
+            The span of text to which this Quick Info session applies.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.Content">
+            <summary>
+            The ordered, merged collection of content to be displayed in the Quick Info.
+            </summary>
+            <remarks>
+            This field is originally null and is updated with the content once the session has
+            finished querying the providers.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.HasInteractiveContent">
+            <summary>
+            Indicates that this Quick Info has interactive content that can request to stay open.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.Options">
+            <summary>
+            Specifies attributes of the Quick Info session and Quick Info session presentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.State">
+            <summary>
+            The current state of the Quick Info session.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.TextView">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> for which this Quick Info session was created.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.GetTriggerPoint(Microsoft.VisualStudio.Text.ITextBuffer)">
+            <summary>
+            Gets the point at which the Quick Info tip was triggered in the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Returned <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint"/> is on the buffer requested by the caller.
+            </remarks>
+            <param name="textBuffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> relative to which to obtain the point.</param>
+            <returns>A <see cref="T:Microsoft.VisualStudio.Text.ITrackingPoint"/> indicating the point over which Quick Info was invoked.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.GetTriggerPoint(Microsoft.VisualStudio.Text.ITextSnapshot)">
+            <summary>
+            Gets the point at which the Quick Info tip was triggered in the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+            </summary>
+            <remarks>
+            Returned point is on the buffer requested by the caller.
+            </remarks>
+            <param name="snapshot">The <see cref="T:Microsoft.VisualStudio.Text.ITextSnapshot"/> relative to which to obtain the point.</param>
+            <returns>The point over which Quick Info was invoked or <c>null</c> if it does not exist in <paramref name="snapshot"/>.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.DismissAsync">
+            <summary>
+            Dismisses the Quick Info session, if applicable. If the session is already dismissed,
+            this method no-ops.
+            </summary>
+            <returns>A task tracking the completion of the operation.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource">
+            <summary>
+            Source of Quick Info tooltip content item, proffered to the IDE by a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider"/>.
+            </summary>
+            <remarks>
+            This class is always constructed and disposed on the UI thread and called on
+            a non-UI thread. Callers that require the UI thread must explicitly marshal there with
+            <see cref="M:Microsoft.VisualStudio.Threading.JoinableTaskFactory.SwitchToMainThreadAsync(System.Threading.CancellationToken)"/>.
+            Content objects are resolved into UI constructs via the <see cref="T:Microsoft.VisualStudio.Text.Adornments.IViewElementFactoryService"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource.GetQuickInfoItemAsync(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Threading.CancellationToken)">
+            <summary>
+            Gets Quick Info item and tracking span via a <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem"/>.
+            </summary>
+            <remarks>
+            This method is always called on a background thread. Multiple elements can be
+            be returned by a single source by wrapping them in a <see cref="T:Microsoft.VisualStudio.Text.Adornments.ContainerElement"/>.
+            </remarks>
+            <param name="session">An object tracking the current state of the Quick Info.</param>
+            <param name="cancellationToken">Cancels an in-progress computation.</param>
+            <returns>item and a tracking span for which these item are applicable.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider">
+            <summary>
+            A MEF component part that is proffered to the IDE to construct an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/>.
+            </summary>
+            <remarks>
+            This class is always constructed and called on the UI thread.
+            </remarks>
+            <example>
+            [Export(typeof(IAsyncQuickInfoSourceProvider))]
+            [Name("Foo QuickInfo Provider")]
+            [Order(After = "default")]
+            [ContentType("text")]
+            </example>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSourceProvider.TryCreateQuickInfoSource(Microsoft.VisualStudio.Text.ITextBuffer)">
+            <summary>
+            Creates an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> for the specified <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/>.
+            </summary>
+            <param name="textBuffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> for which this source produces items.</param>
+            <returns>
+            An instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> for <paramref name="textBuffer"/>
+            or null if no source could be created.
+            </returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent">
+            <summary>
+            Represents an interactive Quick Info content. This interface can be used to add an interactive content such as hyperlinks to
+            the Quick Info popup.
+            If any object implementing this interface is provided to
+            <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/> via <see cref="M:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource.GetQuickInfoItemAsync(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Threading.CancellationToken)"/>,
+            the Quick Info presenter will allow to interact with this content, particulartly it will keep Quick Info popup open when mouse 
+            is over it and will allow this content to recieve mouse events.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent.KeepQuickInfoOpen">
+            <summary>
+            Gets whether the interactive Quick Info content wants to keep current Quick Info session open. Until this property is true, 
+            the <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> containing this content won't be dismissed even if mouse is moved somewhere else.
+            This is useful in very rare scenarios when an interactive Quick Info content handles all input interaction, while needs to 
+            keep this <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> open (the only known example so far is LightBulb in its expanded state hosted in 
+            Quick Info).
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.IInteractiveQuickInfoContent.IsMouseOverAggregated">
+            <summary>
+            Gets a value indicating whether the mouse pointer is located over this interactive Quick Info content, 
+            including any parts that are out of the Quick Info visual tree (such as popups).
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem">
+            <summary>
+            The result generated by an <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSource"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.#ctor(Microsoft.VisualStudio.Text.ITrackingSpan,System.Object)">
+            <summary>
+            Constructs a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem"/>.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown if item is null.</exception>
+            <param name="applicableToSpan">The span to which <paramref name="item"/> is applicable.</param>
+            <param name="item">The Quick Info item.</param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.ApplicableToSpan">
+            <summary>
+            The <see cref="T:Microsoft.VisualStudio.Text.ITrackingSpan"/> to which <see cref="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.Item"/> is applicable.
+            </summary>
+            <remarks>
+            This parameter can be null.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoItem.Item">
+            <summary>
+            The item to be displayed in the Quick Info <see cref="T:Microsoft.VisualStudio.Text.Adornments.IToolTipPresenter"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions">
+            <summary>
+            Options for customization of Quick Info behavior.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions.None">
+            <summary>
+            No options.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions.TrackMouse">
+            <summary>
+            Dismisses Quick Info when the mouse moves away.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState">
+            <summary>
+            Defines the possible <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession"/> states.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Created">
+            <summary>
+            Session has been created but is not yet active.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Calculating">
+            <summary>
+            Session is currently computing Quick Info content.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Dismissed">
+            <summary>
+            Session has been dismissed and is no longer active.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState.Visible">
+            <summary>
+            Computation is complete and session is visible.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs">
+            <summary>
+            Arguments for the <see cref="E:Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession.StateChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.#ctor(Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionState)">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs"/>.
+            </summary>
+            <param name="oldState">The state before the transition.</param>
+            <param name="newState">The state after the transition.</param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.OldState">
+            <summary>
+            The state before the transition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionStateChangedEventArgs.NewState">
+            <summary>
+            The state after the transition.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoBrokerSupport">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoBrokerSupport.TriggerQuickInfoAsync(Microsoft.VisualStudio.Text.Editor.ITextView,Microsoft.VisualStudio.Text.ITrackingPoint,Microsoft.VisualStudio.Language.Intellisense.QuickInfoSessionOptions,System.Threading.CancellationToken,Microsoft.VisualStudio.Utilities.PropertyCollection)">
+            <summary>
+            This method supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoMetadata">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSource">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSource.AugmentQuickInfoSession(Microsoft.VisualStudio.Language.Intellisense.IAsyncQuickInfoSession,System.Collections.Generic.IList{System.Object},Microsoft.VisualStudio.Text.ITrackingSpan@)">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSourcesSupport">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Internal.VisualStudio.Language.Intellisense.ILegacyQuickInfoSourcesSupport.LegacySources">
+            <summary>
+            This interface supports the product infrastructure and should not be used.
+            </summary>
+        </member>
+    </members>
+</doc>

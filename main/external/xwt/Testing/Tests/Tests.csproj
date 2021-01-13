@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8C624AB7-8195-4AE5-98CE-5F8676821AF7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunitlite">
+      <HintPath>..\libs\nunitlite.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="ButtonTests.cs" />
+    <Compile Include="CanvasTests.cs" />
+    <Compile Include="CheckBoxTests.cs" />
+    <Compile Include="ComboBoxEntryTests.cs" />
+    <Compile Include="ComboBoxTests.cs" />
+    <Compile Include="FrameTests.cs" />
+    <Compile Include="HBoxTests.cs" />
+    <Compile Include="HPanedTests.cs" />
+    <Compile Include="HSeparatorTests.cs" />
+    <Compile Include="ImageViewTests.cs" />
+    <Compile Include="LabelTests.cs" />
+    <Compile Include="ListBoxTests.cs" />
+    <Compile Include="ListViewTests.cs" />
+    <Compile Include="NotebookTests.cs" />
+    <Compile Include="ProgressBarTests.cs" />
+    <Compile Include="ScrollViewTests.cs" />
+    <Compile Include="SpinButtonTests.cs" />
+    <Compile Include="TableTests.cs" />
+    <Compile Include="TextEntryTests.cs" />
+    <Compile Include="VBoxTests.cs" />
+    <Compile Include="VPanedTests.cs" />
+    <Compile Include="VSeparatorTests.cs" />
+    <Compile Include="WidgetTests.cs" />
+    <Compile Include="ConsoleTestRunner.cs" />
+    <Compile Include="BoxTests.cs" />
+    <Compile Include="DrawingTests.cs" />
+    <Compile Include="ReferenceImageVerifierDialog.cs" />
+    <Compile Include="ReferenceImageManager.cs" />
+    <Compile Include="FontTests.cs" />
+    <Compile Include="ColorTests.cs" />
+    <Compile Include="MatrixTests.cs" />
+    <Compile Include="TransformTests.cs" />
+    <Compile Include="RadioButtonTests.cs" />
+    <Compile Include="WindowTests.cs" />
+    <Compile Include="XwtTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Test.csproj" />
+    <None Include="Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Xwt\Xwt.csproj">
+      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
+      <Name>Xwt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReferenceImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReferenceImages\Rectangle.png">
+      <LogicalName>Rectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\Line.png">
+      <LogicalName>Line.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\pattern-sample.png">
+      <LogicalName>pattern-sample.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePattern.png">
+      <LogicalName>ImagePattern.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithTranslateTransform.png">
+      <LogicalName>ImagePatternWithTranslateTransform.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\Clip.png">
+      <LogicalName>Clip.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ClipAccumulated.png">
+      <LogicalName>ClipAccumulated.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ClipPreserve.png">
+      <LogicalName>ClipPreserve.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ClipSaveRestore.png">
+      <LogicalName>ClipSaveRestore.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\RectangleFill.png">
+      <LogicalName>RectangleFill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\FillPreserve.png">
+      <LogicalName>FillPreserve.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\NewPath.png">
+      <LogicalName>NewPath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\StrokePreserve.png">
+      <LogicalName>StrokePreserve.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LineWidth.png">
+      <LogicalName>LineWidth.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LinearGradient.png">
+      <LogicalName>LinearGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LinearGradientDiagonal.png">
+      <LogicalName>LinearGradientDiagonal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LinearGradientReverse.png">
+      <LogicalName>LinearGradientReverse.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\RadialGradient.png">
+      <LogicalName>RadialGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\RadialGradientReverse.png">
+      <LogicalName>RadialGradientReverse.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\RadialGradientSmall.png">
+      <LogicalName>RadialGradientSmall.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\Arc.png">
+      <LogicalName>Arc.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcFill.png">
+      <LogicalName>ArcFill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcMultipleLoops.png">
+      <LogicalName>ArcMultipleLoops.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegative.png">
+      <LogicalName>ArcNegative.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativeFill.png">
+      <LogicalName>ArcNegativeFill.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativeMultipleLoops.png">
+      <LogicalName>ArcNegativeMultipleLoops.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativePathConnection.png">
+      <LogicalName>ArcNegativePathConnection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativeStartingNegative.png">
+      <LogicalName>ArcNegativeStartingNegative.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativeSwappedAngles.png">
+      <LogicalName>ArcNegativeSwappedAngles.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcPathConnection.png">
+      <LogicalName>ArcPathConnection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcStartingNegative.png">
+      <LogicalName>ArcStartingNegative.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcSwappedAngles.png">
+      <LogicalName>ArcSwappedAngles.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LinearGradientInternalBox.png">
+      <LogicalName>LinearGradientInternalBox.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternInCircle.png">
+      <LogicalName>ImagePatternInCircle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternInTriangle.png">
+      <LogicalName>ImagePatternInTriangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithRotateTransform.png">
+      <LogicalName>ImagePatternWithRotateTransform.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithScaleTransform.png">
+      <LogicalName>ImagePatternWithScaleTransform.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreColor.png">
+      <LogicalName>SaveRestoreColor.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreImagePattern.png">
+      <LogicalName>SaveRestoreImagePattern.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreLinearGradient.png">
+      <LogicalName>SaveRestoreLinearGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreLineWidth.png">
+      <LogicalName>SaveRestoreLineWidth.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestorePath.png">
+      <LogicalName>SaveRestorePath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreRadialGradient.png">
+      <LogicalName>SaveRestoreRadialGradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\SaveRestoreTransform.png">
+      <LogicalName>SaveRestoreTransform.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\Curve.png">
+      <LogicalName>Curve.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\CurvePathConnection.png">
+      <LogicalName>CurvePathConnection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\RectanglePathConnection.png">
+      <LogicalName>RectanglePathConnection.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcClosePath.png">
+      <LogicalName>ArcClosePath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ArcNegativeClosePath.png">
+      <LogicalName>ArcNegativeClosePath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\CurveClosePath.png">
+      <LogicalName>CurveClosePath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\CurveFillWithHoles.png">
+      <LogicalName>CurveFillWithHoles.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\LineClosePath.png">
+      <LogicalName>LineClosePath.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\Text.png">
+      <LogicalName>Text.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\TextLineBreak.png">
+      <LogicalName>TextLineBreak.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\TextSize.png">
+      <LogicalName>TextSize.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\TextTrimmingEllipsis.png">
+      <LogicalName>TextTrimmingEllipsis.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\TextWithBlankLines.png">
+      <LogicalName>TextWithBlankLines.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\TextWordWrap.png">
+      <LogicalName>TextWordWrap.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\DrawPathTwoTimes.png">
+      <LogicalName>DrawPathTwoTimes.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithAlpha.png">
+      <LogicalName>ImagePatternWithAlpha.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithRotateTransformWithAlpha.png">
+      <LogicalName>ImagePatternWithRotateTransformWithAlpha.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithScaleTransformWithAlpha.png">
+      <LogicalName>ImagePatternWithScaleTransformWithAlpha.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceImages\ImagePatternWithTranslateTransformWithAlpha.png">
+      <LogicalName>ImagePatternWithTranslateTransformWithAlpha.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="None" ResourceNamePolicy="FileName" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

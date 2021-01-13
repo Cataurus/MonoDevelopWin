@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<TestTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <TestType>
+        <Test Id="{7a24f8ff-85da-d664-ef44-83ff4743dae6}" NameId="#111" SatelliteBasePath="%ExecutingAssemblyDirectory%" SatelliteDllName="Microsoft.VisualStudio.QualityTools.Tips.TuipPackageUI.dll" ServiceType="Microsoft.VisualStudio.TestTools.TestTypes.Manual.SManualTestService, Microsoft.VisualStudio.QualityTools.Vsip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" TipProvider="Microsoft.VisualStudio.TestTools.TestTypes.Manual.ManualTestTip, Microsoft.VisualStudio.QualityTools.Tips.ManualTest.Tip, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VsEditor="{0cc3387e-c1f8-96de-b5fd-a93d48110d16}">
+            <Extensions>
+                <Extension Name=".mht" IconId="107" />
+                <Extension Name=".mtx" IconId="119" />
+            </Extensions>
+        </Test>
+    </TestType>
+</TestTypes>

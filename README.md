@@ -5,7 +5,7 @@ ___
 # MonoDevelop for Windows
 
 This is a build fork of the original [***MonoDevelop***](https://github.com/mono/monodevelop) project to provide an installation package for Windows.
-This is currently based on the tag: monodevelop-7.6.9.22.
+This is currently based on the tag: monodevelop-7.8.4.1
 Some changes have been made to resolve library dependencies and the project to build the setup program is completely new. Also there is now a powershell script
 which installs the prerequisites for the build.
 

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDERDATA">
+            <Directory Id="dirA00A9873F5B535DE79B2D4BBB505533B" Name="options">
+                <Component Id="cmp5CEF1A27F550F546781FE2F35FA7E89A" Guid="{2FC0C997-D9C4-46B6-8A27-19EEB49D1499}">
+                    <File Id="fil224C57F6E36D3CD625BE195A2B6EFEF9" KeyPath="yes" Source="$(var.BasePathData)\options\DefaultEditingLayout.xml" />
+                </Component>
+                <Component Id="cmp7CE5D90A6C50C2F94B99F24435F8FD73" Guid="{766C97E6-B5C1-4EBA-A6AB-C0294EDEE567}">
+                    <File Id="filC2DFBB52E9C085A12D5900EAB7EED93A" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelop-templates.xml" />
+                </Component>
+                <Component Id="cmp47E73BC991FDA309A5E1829FC74EA594" Guid="{35FEBD2C-677D-4685-A72A-BE663B21A741}">
+                    <File Id="filA89E8815D76F311B1136ADA4EAE70E87" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelop-tools.xml" />
+                </Component>
+                <Component Id="cmp9B1BBEC9DC7FB760CA3743622812AD33" Guid="{12E5AC6F-3AEB-47C3-949B-AA261FE4FF46}">
+                    <File Id="fil402B388298956B9D60212FEEF3D50AF2" KeyPath="yes" Source="$(var.BasePathData)\options\MonoDevelopProperties.xml" />
+                </Component>
+                <Component Id="cmp5D341981342F27D07D7CCEB10F9184A9" Guid="{D16195B1-E4AD-4900-B38F-0B57971E37A1}">
+                    <File Id="fil6015D5C324D10E44709B565C0D2A44E3" KeyPath="yes" Source="$(var.BasePathData)\options\TipsOfTheDay.xml" />
+                </Component>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="PublishedComponentsData">
+            <ComponentRef Id="cmp5CEF1A27F550F546781FE2F35FA7E89A" />
+            <ComponentRef Id="cmp7CE5D90A6C50C2F94B99F24435F8FD73" />
+            <ComponentRef Id="cmp47E73BC991FDA309A5E1829FC74EA594" />
+            <ComponentRef Id="cmp9B1BBEC9DC7FB760CA3743622812AD33" />
+            <ComponentRef Id="cmp5D341981342F27D07D7CCEB10F9184A9" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

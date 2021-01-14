@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?define ProductName="MonoDevelop"?>
+<?define ProductManufacturer="MonoDevelop Project"?>
+<?define ProductLanguage="1033"?>
+<?define ProductVersion="7.6.9.22"?>
+<?define ProductDescription="MonoDevelop for Windows"?>
+<?define ProductKeywords="ide, c#, v#, mono, monodevelop"?>
+<?define ProductComments=""Integrated IDE for C# and B# under Linux, Windows and Mac?>
+<?define ProductGUID="{0E7D7EA0-9D3C-4961-9EC9-50285C68A154}"?>
+<?define UpgradeGUID="{CC7E8FDC-698E-4D48-9995-CBED722A17BE}"?>
+
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product 
+		Id="*" 
+		Name="$(var.ProductName)" 
+		Language="$(var.ProductLanguage)" 
+		Version="$(var.ProductVersion)" 
+		Manufacturer="$(var.ProductManufacturer)" 
+		UpgradeCode="$(var.UpgradeGUID)" >
+		
+		<Package 
+			InstallerVersion="200" 
+			Compressed="yes" 
+			InstallScope="perMachine"
+			Platform="$(var.Platform)"
+			Manufacturer="$(var.ProductManufacturer)"
+			Description="$(var.ProductDescription)"
+			Keywords="$(var.ProductKeywords)"
+			Comments="$(var.ProductComments)"
+			Languages="$(var.ProductLanguage)"
+			/>
+
+		<MajorUpgrade
+			AllowDowngrades="no"
+			AllowSameVersionUpgrades="yes"
+			DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
+		
+		<MediaTemplate 
+			EmbedCab="yes"
+			CabinetTemplate="media{0}.cab"/>
+
+		<Property Id="GTKSHARPVERSION">
+			<RegistrySearch Id="gsversion" Root="HKLM" Key="SOFTWARE\Novell\GtkSharp\Version" Type="raw" />
+		</Property>
+		<Condition Message="Gtk# version 2.12.9 or greater must be installed.">
+			<![CDATA[GTKSHARPVERSION >= "2.12" OR REMOVE ~= "ALL"]]>
+		</Condition>
+		
+		<Icon 
+			Id="icon.ico" 
+			SourceFile="$(var.ProjectDir)\Assets\MonoDevelop.ico" />
+
+		<!-- Use the icon.ico icon for this installer (shows up in Add/Remove programs) -->
+		<Property Id="ARPPRODUCTICON">icon.ico</Property>
+		
+		<!-- Help/Support website (shows in the Add/Remove programs) -->
+		<Property Id="ARPURLINFOABOUT">https://github.com/cataurus/monodevelopwin/</Property>
+
+		<!-- Create a basic UI for the installer -->
+		<UIRef Id="WixUI_Minimal" />
+
+		<!-- Change the installer UI background images -->
+		<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\Assets\License.rtf" />
+		<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)\Assets\Background.bmp" />
+		<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)\Assets\Banner.bmp" />
+		
+		<Feature 
+			Id="ProductFeature"
+			Title="MonoDevelop"
+			Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="ProductComponentsBin" />
+			<ComponentGroupRef Id="PublishedComponentsBin" />
+			<ComponentGroupRef Id="PublishedComponentsData" />
+			<ComponentGroupRef Id="PublishedComponentsAddIns" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="MonoDevelop">
+					<Directory Id="INSTALLFOLDERBIN" Name="bin">            
+					</Directory>
+					<Directory Id="INSTALLFOLDERDATA" Name="data">            
+					</Directory>
+					<Directory Id="INSTALLFOLDERADDINS" Name="AddIns">            
+					</Directory>
+				</Directory>
+			</Directory>
+
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="InstallProgramMenuFolder" Name="$(var.ProductName)" />
+			</Directory>
+			
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			
+		</ComponentGroup>
+		
+		<ComponentGroup Id="ProductComponentsBin" Directory="INSTALLFOLDERBIN">
+			<ComponentRef Id="MainAppShortcut" />
+		</ComponentGroup>
+
+		<DirectoryRef Id="INSTALLFOLDER">
+				
+		</DirectoryRef>
+
+		<DirectoryRef Id="INSTALLFOLDERBIN">
+
+			<!-- Shortcut to main application -->
+			<Component Id="MainAppShortcut" Guid="{0995664D-AE63-4DD6-B894-708A99611370}">
+
+				<Shortcut Id="MainAppShortcut"
+									Name="$(var.ProductName)"
+									Target="[INSTALLFOLDERBIN]$(var.ProductName).exe"
+									Directory="ProgramMenuFolder"
+									WorkingDirectory="INSTALLFOLDERBIN"
+									Icon="icon.ico"
+									/>
+
+				<!-- Our unique key for this component/shortcut -->
+				<RegistryValue Id="RegShortcutKey" Root="HKCU" Key="SOFTWARE\$(var.ProductManufacturer)\$(var.ProductName)" Name="Shortcut" Value="1" Type="integer" KeyPath="yes" />
+
+				<!--Remove start menu items -->
+				<RemoveFolder Id="RemoveStartMenu" Directory="InstallProgramMenuFolder" On="uninstall" />
+
+			</Component>
+
+		</DirectoryRef>
+
+		<DirectoryRef Id="INSTALLFOLDERDATA">
+
+		</DirectoryRef>
+
+		<DirectoryRef Id="INSTALLFOLDERADDINS">
+
+		</DirectoryRef>
+
+	</Fragment>
+</Wix>

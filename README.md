@@ -14,11 +14,11 @@ which installs the prerequisites for the build.
 
 ## Install
 
-Installer load from for  version:
+Installer load for version:
 
-[7.6.9](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/)
+* [7.6.9](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22)
 
-[7.8.4](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.8.4/)
+* [7.8.4](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.8.4)
 
 ## Compiling
 

@@ -1,5 +1,8 @@
-[![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelop-.NET%20Desktop-CI)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=10)
-[![Build status](https://ci.appveyor.com/api/projects/status/kcpqh2ivfmgi8b51/branch/monodevelopwin?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/monodevelopwin)
+
+| monodevelopwin-7.6.9 | monodevelopwin-7.8.4 |
+| :------------------- | -------------------: |
+| [![Build status](https://ci.appveyor.com/api/projects/status/kcpqh2ivfmgi8b51/branch/monodevelopwin?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/monodevelopwin) ||
+| [![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelopWin-7.6.9)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=10) | [![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelopWin-7.8.4)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=12)|
 ___
 
 # MonoDevelop for Windows
@@ -11,7 +14,11 @@ which installs the prerequisites for the build.
 
 ## Install
 
-Installer load from [here](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/MonoDevelop-7.6.9.22-x86-Debug.msi)
+Installer load from for  version:
+
+[7.6.9](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/MonoDevelop-7.6.9.22-x86-Debug.msi)
+
+[7.8.4](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.8.4/)
 
 ## Compiling
 
@@ -20,7 +27,7 @@ Installer load from [here](https://github.com/Cataurus/MonoDevelopWin/releases/d
 * open a powershell-terminal and execute the powershell-scriptfile *install.ps1* from the directory *scripts/windows*.
 This will install all prerequisite programs and do some fixes to compile Monodevelop
 to build.
-* then change in this terminal, to the directory *main* and run 'winbuild.bat'
+* then change in this terminal to the directory *main* and run *winbuild.bat*
 * wait for completed build
 * you can then start the IDE *via winrun.bat*
 

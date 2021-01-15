@@ -1,7 +1,7 @@
 
 | monodevelopwin-7.6.9 | monodevelopwin-7.8.4 |
 | :------------------- | -------------------: |
-| [![Build status](https://ci.appveyor.com/api/projects/status/kcpqh2ivfmgi8b51/branch/monodevelopwin?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/monodevelopwin) ||
+| |[![Build status](https://ci.appveyor.com/api/projects/status/kcpqh2ivfmgi8b51/branch/monodevelopwin?svg=true)](https://ci.appveyor.com/project/Cataurus/monodevelopwin/branch/monodevelopwin) |
 | [![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelopWin-7.6.9)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=10) | [![Build status](https://cataurusfynn.visualstudio.com/MonoDevelop/_apis/build/status/MonoDevelopWin-7.8.4)](https://cataurusfynn.visualstudio.com/MonoDevelop/_build/latest?definitionId=12)|
 ___
 
@@ -16,7 +16,7 @@ which installs the prerequisites for the build.
 
 Installer load from for  version:
 
-[7.6.9](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/MonoDevelop-7.6.9.22-x86-Debug.msi)
+[7.6.9](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.6.9.22/)
 
 [7.8.4](https://github.com/Cataurus/MonoDevelopWin/releases/download/7.8.4/)
 
